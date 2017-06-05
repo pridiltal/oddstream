@@ -18,7 +18,6 @@ extract_tsfeatures(y, normalise = TRUE, width = ifelse(frequency(y) > 1,
 }
 \value{
 An object of class features with the following components:
-\describe{
   \item{mean}{Mean}
   \item{var}{Variance}
   \item{lumpinessy}{Variance of annual variances of remainder}
@@ -36,7 +35,6 @@ An object of class features with the following components:
   \item{rmeaniqmean}{Ratio between interquartile mean and the arithmetic mean }
   \item{moment3}{Third moment}
   \item{highlowmu}{ratio between the means of data that is below and upper the global mean}
-}
 }
 \description{
 This function extract time series features from a collection of time series.
