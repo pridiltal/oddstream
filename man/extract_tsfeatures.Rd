@@ -38,7 +38,8 @@ An object of class features with the following components:
 }
 \description{
 This function extract time series features from a collection of time series.
-This is a modification of  \code{\link[anomalous]{tsmeasures}}.
+This is a modification of  \code{\link[anomalous]{tsmeasures}} function of \code{\link[anomalous]{anomalous}}
+package .
 }
 \examples{
 #Data Generation
