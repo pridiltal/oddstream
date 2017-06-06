@@ -7,7 +7,7 @@
 plotpc(pc_pcnorm)
 }
 \arguments{
-\item{pc_pcnorm}{The scores of the first two pricipal components returned by \code{get_pc_space}}
+\item{pc_pcnorm}{The scores of the first two pricipal components returned by \code{\link{get_pc_space}}}
 }
 \value{
 A graphical representation of the two dimensional feature space will be produced on the current graphic

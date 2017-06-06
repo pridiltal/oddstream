@@ -27,4 +27,5 @@ Suggests: mvtsplot,
 Imports: pcaPP,
     stats,
     ggplot2,
-    plotly
+    plotly,
+    ks

@@ -37,7 +37,7 @@ get_pc_space <- function(features, robust = TRUE) {
 #'
 #' @description Plot a two dimensional feature space on the current graphics device using the first two
 #' pricipal component returned by \code{\link{get_pc_space}}
-#' @param pc_pcnorm The scores of the first two pricipal components returned by \code{get_pc_space}
+#' @param pc_pcnorm The scores of the first two pricipal components returned by \code{\link{get_pc_space}}
 #' @return A graphical representation of the two dimensional feature space will be produced on the current graphic
 #' device.
 #' @seealso \code{\link{get_pc_space}}
