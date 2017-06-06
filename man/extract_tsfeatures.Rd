@@ -31,10 +31,10 @@ An object of class features with the following components:
   \item{trough}{Strength of trough}
   \item{BurstinessFF}{Burstiness of time series using Fano Factor}
   \item{min}{Minimum value}
-  \item{max}{maximum value}
+  \item{max}{Maximum value}
   \item{rmeaniqmean}{Ratio between interquartile mean and the arithmetic mean }
   \item{moment3}{Third moment}
-  \item{highlowmu}{ratio between the means of data that is below and upper the global mean}
+  \item{highlowmu}{Ratio between the means of data that is below and upper the global mean}
 }
 \description{
 This function extract time series features from a collection of time series.

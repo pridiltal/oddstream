@@ -45,44 +45,44 @@
 #' }
 #' f=extract_tsfeatures(tsframe)
 extract_tsfeatures <- function(y, normalise = TRUE, width = ifelse(frequency(y) > 1, frequency(y), 10), window = width) {
-
-
+    
+    
     # y: a multivariate time series normalise: TRUE: scale data to be normally distributed width: a window size for variance
     # change and level shift, lumpiness window: a window size for KLscore
     y <- as.ts(y)
     tspy <- tsp(y)
     freq <- frequency(y)
-
-
+    
+    
     # Remove columns containing all NAs
     nay <- is.na(y)
     allna <- apply(nay, 2, all)
     x <- y[, !allna]
-
+    
     # Normalise data to mean = 0, sd = 1
     if (normalise) {
         x <- as.ts(scale(x, center = TRUE, scale = TRUE))
     }
-
+    
     # create a location to store the measures
     measures <- list()
-
+    
     # measure1 - Calculate mean of ts
     measures$mean <- colMeans(y, na.rm = TRUE)
-
+    
     # measure2 - Calculate variance of ts
     measures$var <- apply(y, 2, var, na.rm = TRUE)
-
+    
     # measure5 - Lumpiness
     measures$lumpinessy <- apply(y, 2, Lump, width = width)
-
+    
     # measure6 - Level shift using rolling window
     measures$lshifty <- apply(y, 2, RLshift, width = width)
-
-
+    
+    
     # measure7 - variance change using rolling window
     measures$vchangey <- apply(y, 2, RVarChange, width = width)
-
+    
     # measure11,12,13,14,15,16,17 - Strength of trend and seasonality and spike
     varts <- apply(y, 2, VarTS, tspx = tspy)
     # measures$trend <- sapply(varts, function(y) y$trend)
@@ -94,28 +94,28 @@ extract_tsfeatures <- function(y, normalise = TRUE, width = ifelse(frequency(y) 
         measures$peak <- sapply(varts, function(y) y$peak)
         measures$trough <- sapply(varts, function(y) y$trough)
     }
-
+    
     # measure19 - burstiness of time series
     measures$BurstinessFF <- apply(y, 2, BurstFF)
-
+    
     # measure21,22 - Calculate the time series length)
     minmax <- apply(y, 2, function(x) tsminmax(x))  #original data set
     measures$min <- sapply(minmax, function(x) x$mn)
     measures$max <- sapply(minmax, function(x) x$mx)
-
+    
     # measure28 - the ratio between interquartile mean and the arithmetic mean
     measures$rmeaniqmean <- apply(y, 2, rmeaniqmean)  #apply to original data
-
+    
     # measure29 - Calculate the moments moments <- apply(y, 2, dmoments) #apply to original data set measures$moment3 <-
     # sapply(moments, function(y) y$m3)
     measures$moment3 <- apply(y, 2, dmoments)
-
-
-
-
+    
+    
+    
+    
     # measure32 - compare the means of data that is below and upper the global mean
     measures$highlowmu <- apply(y, 2, highlowmu)  #apply to original data
-
+    
     # get all the measures to one data frame
     tmp <- do.call(cbind, measures)
     nr <- ncol(y)
@@ -255,7 +255,7 @@ rmeaniqmean <- function(x) {
 dmoments <- function(x) {
     # momentssd<-rep(0,9) for(i in 1:9) {momentssd[i]= moments::moment(x, order=i+2, na.rm=TRUE) } out=momentssd/sd(x)
     # return(list(m3=out[1], m4=out[2], m5=out[3], m6=out[4], m7=out[5], m8=out[6], m9=out[7], m10=out[8], m11=out[9]))
-
+    
     momentssd <- 0
     momentssd = moments::moment(x, order = 3, na.rm = TRUE)
     out = momentssd/sd(x, na.rm = TRUE)

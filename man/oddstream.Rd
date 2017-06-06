@@ -31,7 +31,7 @@ Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with mul
 Journal of signal processing systems, 65 (3),371-389.
 }
 \seealso{
-The core functions in this package:  \code{\link{extract_tsfeatures}}
+The core functions in this package:  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}}
 }
 \author{
 Priyanga Dilini Talagala, Rob J. Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Munoz

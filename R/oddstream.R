@@ -15,7 +15,7 @@
 #' cope with concept drift, the forecast boundary for the system's typical behaviour is updated periodically.
 #'
 #' @author Priyanga Dilini Talagala, Rob J. Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Munoz
-#' @seealso The core functions in this package:  \code{\link{extract_tsfeatures}}
+#' @seealso The core functions in this package:  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}}
 #' @references
 #' Priyanga Dilini Talagala, Rob J Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Munoz (2017).
 #' Anomaly Detection in Streaming Time Series Data. 37th International Symposium on Forecasting Cairns, Australia
