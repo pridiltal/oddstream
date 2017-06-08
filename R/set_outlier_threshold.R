@@ -16,11 +16,11 @@
 #' Journal of signal processing systems, 65 (3),371-389.
 #' @examples
 set_outlier_threshold <- function(pc_pcnorm, p_rate = 0.001, trials = 500) {
-
+    
     # Calculating the density region for typical data
     H_scv <- ks::Hscv(x = pc_pcnorm)
     fhat2 <- ks::kde(x = pc_pcnorm, H = H_scv, compute.cont = TRUE)
-
+    
     # generating data to find the threshold value
     fun2 <- function(x) {
         return(MASS::mvrnorm(n = 1, mu = x, Sigma = H_scv))
@@ -45,6 +45,6 @@ set_outlier_threshold <- function(pc_pcnorm, p_rate = 0.001, trials = 500) {
     dm <- 1/(sqrt(2 * log(m)))
     t <- cm + y * dm
     threshold_fnx <- exp(-((t^2) + 2 * log(2 * pi))/2)
-
+    
     return(threshold_fnx)
 }
