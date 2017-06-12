@@ -27,13 +27,13 @@ The name \code{oddstream} comes from \code{Outlier Detection in Data STREAMs}
 Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate extreme value statistics.
 Journal of signal processing systems, 65 (3),371-389.
 
-Priyanga Dilini Talagala, Rob J Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Munoz (2017).
-Anomaly Detection in Streaming Time Series Data. 37th International Symposium on Forecasting Cairns, Australia
+Priyanga Dilini Talagala, Rob J Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Muñoz (2017).
+Anomaly Detection in Streaming Time Series Data.
 }
 \seealso{
-The core functions in this package: ,  \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
-\code{\link{set_outlier_threshold}}
+The core functions in this package: \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
+\code{\link{set_outlier_threshold}}, \code{\link{plotpc}}
 }
 \author{
-Priyanga Dilini Talagala, Rob J. Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Mu\~{n}oz
+Priyanga Dilini Talagala, Rob J. Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Muñoz
 }

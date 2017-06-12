@@ -14,15 +14,15 @@
 #' collection of series. Feature based representation of time series is used as the input to the model. To
 #' cope with concept drift, the forecast boundary for the system's typical behaviour is updated periodically.
 #'
-#' @author Priyanga Dilini Talagala, Rob J. Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Mu\~{n}oz
-#' @seealso The core functions in this package: ,  \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
-#' \code{\link{set_outlier_threshold}}
+#' @author Priyanga Dilini Talagala, Rob J. Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Muñoz
+#' @seealso The core functions in this package: \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
+#' \code{\link{set_outlier_threshold}}, \code{\link{plotpc}}
 #' @references
 #' Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate extreme value statistics.
 #' Journal of signal processing systems, 65 (3),371-389.
 #'
-#' Priyanga Dilini Talagala, Rob J Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Munoz (2017).
-#' Anomaly Detection in Streaming Time Series Data. 37th International Symposium on Forecasting Cairns, Australia
+#' Priyanga Dilini Talagala, Rob J Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Muñoz (2017).
+#' Anomaly Detection in Streaming Time Series Data.
 #'
 #' @note The name \code{oddstream} comes from \code{Outlier Detection in Data STREAMs}
 #' @docType package

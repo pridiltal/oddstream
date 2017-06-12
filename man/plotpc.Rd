@@ -17,6 +17,17 @@ device.
 Plot a two dimensional feature space on the current graphics device using the first two
 pricipal component returned by \code{\link{get_pc_space}}
 }
+\examples{
+#Generate training dataset
+set.seed(123)
+nobs = 500
+nts = 50
+train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
+features <- extract_tsfeatures(train_data)
+pc <- get_pc_space(features)
+plotpc(pc$pcnorm)
+}
 \seealso{
-\code{\link{get_pc_space}}
+\code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
+\code{\link{set_outlier_threshold}}
 }

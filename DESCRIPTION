@@ -29,3 +29,4 @@ Imports: pcaPP,
     ggplot2,
     plotly,
     ks
+Encoding: UTF-8

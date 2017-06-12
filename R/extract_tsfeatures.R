@@ -25,7 +25,9 @@
 #'   \item{rmeaniqmean}{Ratio between interquartile mean and the arithmetic mean }
 #'   \item{moment3}{Third moment}
 #'   \item{highlowmu}{Ratio between the means of data that is below and upper the global mean}
-#' @seealso \code{\link[anomalous]{tsmeasures}}
+#' @seealso \code{\link[anomalous]{tsmeasures}}, \code{\link{find_odd_streams}}, \code{\link{get_pc_space}},
+#' \code{\link{set_outlier_threshold}}, \code{\link{plotpc}}
+#'
 #' @export
 #' @importFrom moments moment
 #' @importFrom RcppRoll roll_mean
@@ -36,14 +38,13 @@
 #'
 #' {Fulcher, B. D. (2012). Highly comparative time-series analysis. PhD thesis, University of Oxford.}
 #' @examples
-#' #Data Generation
-#' nobs = 100
-#' nts =50
-#' tsframe <- ts(matrix(ncol=nts, nrow=nobs))
-#' for(i in 1:nts){
-#'   tsframe[,i] <- 10 + rnorm(nobs,0,3) # adding noise
-#' }
-#' f=extract_tsfeatures(tsframe)
+#' #Generate training dataset
+#' set.seed(123)
+#' nobs = 500
+#' nts = 50
+#' train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
+#' features <- extract_tsfeatures(train_data)
+#'
 extract_tsfeatures <- function(y, normalise = TRUE, width = ifelse(frequency(y) > 1, frequency(y), 10), window = width) {
     
     

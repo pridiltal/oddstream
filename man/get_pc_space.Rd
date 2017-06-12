@@ -22,6 +22,17 @@ It returns a list with class 'pcattributes' containing the following components:
 Define a two dimensional feature space using the first two principal components generated from
 the fetures matrix returned by \code{extract_tsfeatures}
 }
+\examples{
+#Generate training dataset
+set.seed(123)
+nobs = 500
+nts = 50
+train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
+features <- extract_tsfeatures(train_data)
+pc <- get_pc_space(features)
+
+}
 \seealso{
-\code{\link{extract_tsfeatures}}, \code{\link[pcaPP]{PCAproj}}, \code{\link[stats]{prcomp}}
+\code{\link[pcaPP]{PCAproj}}, \code{\link[stats]{prcomp}}, \code{\link{find_odd_streams}},
+\code{\link{extract_tsfeatures}}, \code{\link{set_outlier_threshold}}, \code{\link{plotpc}}
 }

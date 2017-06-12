@@ -42,14 +42,13 @@ This is a modification of  \code{\link[anomalous]{tsmeasures}} function of \code
 package .
 }
 \examples{
-#Data Generation
-nobs = 100
-nts =50
-tsframe <- ts(matrix(ncol=nts, nrow=nobs))
-for(i in 1:nts){
-  tsframe[,i] <- 10 + rnorm(nobs,0,3) # adding noise
-}
-f=extract_tsfeatures(tsframe)
+#Generate training dataset
+set.seed(123)
+nobs = 500
+nts = 50
+train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
+features <- extract_tsfeatures(train_data)
+
 }
 \references{
 {Hyndman, R. J., Wang, E., & Laptev, N. (2015). Large-scale unusual time series detection.
@@ -58,5 +57,6 @@ In 2015 IEEE International Conference on Data Mining Workshop (ICDMW), (pp. 1616
 {Fulcher, B. D. (2012). Highly comparative time-series analysis. PhD thesis, University of Oxford.}
 }
 \seealso{
-\code{\link[anomalous]{tsmeasures}}
+\code{\link[anomalous]{tsmeasures}}, \code{\link{find_odd_streams}}, \code{\link{get_pc_space}},
+\code{\link{set_outlier_threshold}}, \code{\link{plotpc}}
 }

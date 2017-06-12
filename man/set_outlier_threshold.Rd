@@ -4,7 +4,7 @@
 \alias{set_outlier_threshold}
 \title{Set a threshold for outlier detection}
 \usage{
-set_outlier_threshold(pc_pcnorm, p_rate = 0.001, trials = 500)
+set_outlier_threshold(pc_pcnorm, p_rate = 0.001, trials = 300)
 }
 \arguments{
 \item{pc_pcnorm}{The scores of the first two pricipal components returned by \code{\link{get_pc_space}}}
@@ -22,10 +22,22 @@ This function forecasts a boundary for the typical behaviour using a representat
 of the typical behaviour of a given system. An approach based on extreme value theory is used for this boundary
 prediction process.
 }
+\examples{
+#Generate training dataset
+set.seed(123)
+nobs = 500
+nts = 50
+train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
+features <- extract_tsfeatures(train_data)
+pc <- get_pc_space(features)
+threshold <- set_outlier_threshold(pc$pcnorm)
+threshold$threshold_fnx
+}
 \references{
 Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate extreme value statistics.
 Journal of signal processing systems, 65 (3),371-389.
 }
 \seealso{
-\code{\link{get_pc_space}}
+\code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
+\code{\link{plotpc}}
 }

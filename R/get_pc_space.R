@@ -9,15 +9,24 @@
 #'    \item{center, scale}{The centering and scaling used}
 #'    \item{rotation}{the matrix of variable loadings (i.e., a matrix whose columns contain the eigenvectors).
 #'                    The function \code{princomp} returns this in the element loadings.}
-#' @seealso \code{\link{extract_tsfeatures}}, \code{\link[pcaPP]{PCAproj}}, \code{\link[stats]{prcomp}}
+#' @seealso  \code{\link[pcaPP]{PCAproj}}, \code{\link[stats]{prcomp}}, \code{\link{find_odd_streams}},
+#' \code{\link{extract_tsfeatures}}, \code{\link{set_outlier_threshold}}, \code{\link{plotpc}}
 #' @export
 #' @importFrom pcaPP PCAproj
 #' @importFrom stats prcomp
 #' @examples
+#' #Generate training dataset
+#' set.seed(123)
+#' nobs = 500
+#' nts = 50
+#' train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
+#' features <- extract_tsfeatures(train_data)
+#' pc <- get_pc_space(features)
+#'
 get_pc_space <- function(features, robust = TRUE) {
-    
+
     if (robust) {
-        pc <- pcaPP::PCAproj(f1, ncol(f1), scale = sd, center = mean)
+        pc <- pcaPP::PCAproj(features, ncol(features), scale = sd, center = mean)
         pcnorm <- pc$scores[, 1:2]
         colnames(pcnorm) <- c("PC1", "PC2")
         pc <- list(pcnorm = pcnorm, center = pc$center, scale = pc$scale, rotation = pc$loadings[, 1:ncol(f1)])
@@ -26,11 +35,12 @@ get_pc_space <- function(features, robust = TRUE) {
         pcnorm <- pc$x[, 1:2]
         pc <- list(pcnorm = pcnorm, center = pc$center, scale = pc$scale, rotation = pc$rotation)
     }
-    
+
     class(pc) <- "pcattributes"
     return(pc)
-    
+
 }
+
 
 
 #' Plot a two dimensional feature space on the current graphics device.
@@ -40,22 +50,32 @@ get_pc_space <- function(features, robust = TRUE) {
 #' @param pc_pcnorm The scores of the first two pricipal components returned by \code{\link{get_pc_space}}
 #' @return A graphical representation of the two dimensional feature space will be produced on the current graphic
 #' device.
-#' @seealso \code{\link{get_pc_space}}
+#' @seealso \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
+#' \code{\link{set_outlier_threshold}}
 #' @export
 #' @importFrom ggplot2 ggplot
 #' @importFrom plotly ggplotly
 #' @examples
+#' #Generate training dataset
+#' set.seed(123)
+#' nobs = 500
+#' nts = 50
+#' train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
+#' features <- extract_tsfeatures(train_data)
+#' pc <- get_pc_space(features)
+#' plotpc(pc$pcnorm)
 plotpc <- function(pc_pcnorm) {
     data <- data.frame(cbind(pc_pcnorm, series = 1:nrow(pc_pcnorm)))
     colnames(data) <- c("PC1", "PC2", "series")
     if (!requireNamespace("ggplot2", quietly = TRUE)) {
         stop("ggplot2 needed for this function to work. Please install it.", call. = FALSE)
     }
-    pc_space <- ggplot2::ggplot(data, aes(x = PC1, y = PC2, label1 = series)) + geom_point()
+    pc_space <- ggplot2::ggplot(data,  aes(x = PC1, y = PC2, label1 = series )) + geom_point(colour = "blue")
+
     if (!requireNamespace("plotly", quietly = TRUE)) {
         stop("plotly needed for this function to work. Please install it.", call. = FALSE)
     }
-    plotly::ggplotly(pcplot)
+    plotly::ggplotly(pc_space)
 }
 
 

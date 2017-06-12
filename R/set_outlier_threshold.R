@@ -8,19 +8,29 @@
 #' @param trials Number of trials to generate the extreme value distirbution. Default value is set to 500.
 #' @return Returns a threshold to determine outlying series in the next window  consists with a collection of
 #' time series.
-#' @seealso \code{\link{get_pc_space}}
+#' @seealso  \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
+#' \code{\link{plotpc}}
 #' @export
 #' @importFrom ks Hscv
 #' @importFrom MASS mvrnorm
 #' @references Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate extreme value statistics.
 #' Journal of signal processing systems, 65 (3),371-389.
 #' @examples
-set_outlier_threshold <- function(pc_pcnorm, p_rate = 0.001, trials = 500) {
-    
+#' #Generate training dataset
+#' set.seed(123)
+#' nobs = 500
+#' nts = 50
+#' train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
+#' features <- extract_tsfeatures(train_data)
+#' pc <- get_pc_space(features)
+#' threshold <- set_outlier_threshold(pc$pcnorm)
+#' threshold$threshold_fnx
+set_outlier_threshold <- function(pc_pcnorm, p_rate = 0.001, trials = 300) {
+
     # Calculating the density region for typical data
     H_scv <- ks::Hscv(x = pc_pcnorm)
     fhat2 <- ks::kde(x = pc_pcnorm, H = H_scv, compute.cont = TRUE)
-    
+
     # generating data to find the threshold value
     fun2 <- function(x) {
         return(MASS::mvrnorm(n = 1, mu = x, Sigma = H_scv))
@@ -45,6 +55,6 @@ set_outlier_threshold <- function(pc_pcnorm, p_rate = 0.001, trials = 500) {
     dm <- 1/(sqrt(2 * log(m)))
     t <- cm + y * dm
     threshold_fnx <- exp(-((t^2) + 2 * log(2 * pi))/2)
-    
-    return(threshold_fnx)
+
+    return(list(threshold_fnx = threshold_fnx, fhat2 = fhat2, H_scv = H_scv))
 }

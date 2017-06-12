@@ -4,23 +4,25 @@
 \alias{find_odd_streams}
 \title{Detect outlying series within a collection of  sreaming time series}
 \usage{
-find_odd_streams(test_stream, pc, threshold, update_threshold = TRUE,
-  update_threshold_freq)
+find_odd_streams(train_data, test_stream, update_threshold = TRUE,
+  update_threshold_freq, plot_type = c("line", "pcplot"),
+  window_length = nrow(train_data), window_skip = window_length)
 }
 \arguments{
-\item{test_stream}{A multivariate streaming time series data set}
+\item{train_data}{A multivariate time series data set that represents the typical behaviour of the system.}
 
-\item{pc}{The pricipal component attributes  returned by \code{\link{get_pc_space}}}
-
-\item{threshold}{A threshold value to determine outlying series. A value returned by
-\code{\link{set_outlier_threshold}}}
+\item{test_stream}{A multivariate streaming time series data set to be tested for outliers}
 
 \item{update_threshold}{If TRUE, the threshold value to determine outlying series is updated.
 The default value is set to TRUE}
 
+\item{window_length}{Sliding window size (Ideally this window length should be equal to the length of the
+training multivariate time series data set that is used to define the outlying threshold)}
+
+\item{window_skip}{The number of steps the window should slide forward. The default is set to window_length}
+
 \item{update_threshold}{A numerical value to indicated how often the threshold should be updated.
- (After how many windows
-it should be updated)}
+(After how many windows it need be updated)}
 }
 \value{
 The indices of the outlying series in each window. For each window a plot is also produced on the current
@@ -31,6 +33,25 @@ This function detect outlying series within a collection of streaming time serie
 is used to handle straming data. In the precence of concept drift, the forecast boundary for the system's typical
 behaviour can be updated periodically.
 }
+\examples{
+#Generate training dataset
+set.seed(123)
+nobs = 500
+nts = 50
+train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
+# Generate test stream with some outliying series
+nobs = 15000
+test_stream <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
+test_stream[200:1400, 20:25] = test_stream[200:1400, 20:25] * 2
+test_stream[3020:3550, 20:25] = test_stream[3020:3550, 20:25] * 1.5
+find_odd_streams(train_data, test_stream , plot_type = 'line', window_skip = 100)
+
+}
+\references{
+Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate
+extreme value statistics. Journal of signal processing systems, 65 (3),371-389.
+}
 \seealso{
-\code{\link{get_pc_space}}, \code{\link{set_outlier_threshold}}
+\code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}}, \code{\link{set_outlier_threshold}},
+\code{\link{plotpc}}
 }
