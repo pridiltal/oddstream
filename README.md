@@ -18,10 +18,27 @@ window is used to test for anomalous series within the newly arrived collection 
 representation of time series is used as the input to the model. To cope with concept drift, the forecast
 boundary for the system's typical behaviour is updated periodically. 
 
-Example 1
+Installation
+------------
+
+``` r
+devtools::install_github("pridiltal/oddstream")
+```
+
+Usage
 ============
 ````
-#example codes will appear here
+#Generate training dataset
+set.seed(123)
+nobs = 500
+nts = 50
+train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
+# Generate test stream with some outliying series
+nobs = 15000
+test_stream <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
+test_stream[200:1400, 20:25] = test_stream[200:1400, 20:25] * 2
+test_stream[3020:3550, 20:25] = test_stream[3020:3550, 20:25] * 1.5
+find_odd_streams(train_data, test_stream , plot_type = 'line', window_skip = 100)
 
 ````
 
