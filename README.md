@@ -28,6 +28,13 @@ devtools::install_github("pridiltal/oddstream")
 Usage
 ============
 ````
+library(oddstream)
+
+#Package help
+package?oddstream
+
+
+#Example 1
 #Generate training dataset
 set.seed(123)
 nobs = 500
