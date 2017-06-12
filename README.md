@@ -2,7 +2,7 @@ oddstream <img src="logo.png" align="right" />
 ============================================
 
 # oddstream {Outlier Detection in Data STREAMs}
-
+---------------------------------------------------
 oddstream: A package for Outlier Detection in Data Streams
 
 Rapid advances in hardware technology have enabled a wide range of physical objects, living beings and 
