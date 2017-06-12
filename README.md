@@ -1,4 +1,4 @@
-oddstream <img src="logo.png" align="right" height="500" />
+oddstream <img src="logo.png" align="right" height="700" />
 ============================================
 
 # oddstream {Outlier Detection in Data STREAMs}
