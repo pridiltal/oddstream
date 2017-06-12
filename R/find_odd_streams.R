@@ -38,29 +38,29 @@
 #' extreme value statistics. Journal of signal processing systems, 65 (3),371-389.
 #'
 #'
-find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, update_threshold_freq, plot_type = c("line",
+find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, update_threshold_freq, plot_type = c("line", 
     "pcplot"), window_length = nrow(train_data), window_skip = window_length) {
-
+    
     train_features <- extract_tsfeatures(train_data)
     pc <- get_pc_space(train_features)
     t <- set_outlier_threshold(pc$pcnorm)
     start <- seq(1, nrow(test_stream), window_skip)
     end <- seq(window_length, nrow(test_stream), window_skip)
-
+    
     i <- 1
     while (i <= length(end)) {
         window_data <- test_stream[start[i]:end[i], ]
-
+        
         window_features <- extract_tsfeatures(window_data)
         pc_test <- scale(window_features, pc$center, pc$scale) %*% pc$rotation
         pctest <- pc_test[, 1:2]
         fhat_test <- ks::kde(x = pc$pcnorm, H = t$H_scv, compute.cont = TRUE, eval.points = pctest)
         outliers <- which(fhat_test$estimate < t$threshold_fnx)
         cat("Outliers: ", outliers, "\n")
-
+        
         if (plot_type == "line") {
             par(pty = "s")
-            plot.ts(as.ts(window_data), plot.type = "single", main = paste("data from: ", start[i], " to: ", end[i]), ylim = c(0,
+            plot.ts(as.ts(window_data), plot.type = "single", main = paste("data from: ", start[i], " to: ", end[i]), ylim = c(0, 
                 range(train_data)[2] * 4), ylab = "Value")
             if (length(outliers) > 0) {
                 f <- function(x) {
@@ -71,18 +71,18 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
         }
         if (plot_type == "pcplot") {
             par(pty = "s")
-            plot(t$fhat2, drawpoints = FALSE, abs.cont = t$threshold_fnx, col = "red", add = F, xlim = range(t$fhat2$x[, 1]) *
+            plot(t$fhat2, drawpoints = FALSE, abs.cont = t$threshold_fnx, col = "red", add = F, xlim = range(t$fhat2$x[, 1]) * 
                 40, ylim = range(t$fhat2$x[, 2]) * 40, main = paste("data from: ", start[i], " to: ", end[i]))
             points(pctest[, 1], pctest[, 2], col = "grey", pch = 16)
-
+            
             if (length(outliers) > 0) {
                 points(pctest[outliers, 1], pctest[outliers, 2], col = "red", pch = 16)
                 text(pctest[outliers, 1], pctest[outliers, 2], labels = outliers, pos = 1, cex = 0.8, col = "black")
             }
-
+            
         }
-
-
+        
+        
         i <- i + 1
     }
     dev.off()

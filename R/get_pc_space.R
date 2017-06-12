@@ -24,7 +24,7 @@
 #' pc <- get_pc_space(features)
 #'
 get_pc_space <- function(features, robust = TRUE) {
-
+    
     if (robust) {
         pc <- pcaPP::PCAproj(features, ncol(features), scale = sd, center = mean)
         pcnorm <- pc$scores[, 1:2]
@@ -35,10 +35,10 @@ get_pc_space <- function(features, robust = TRUE) {
         pcnorm <- pc$x[, 1:2]
         pc <- list(pcnorm = pcnorm, center = pc$center, scale = pc$scale, rotation = pc$rotation)
     }
-
+    
     class(pc) <- "pcattributes"
     return(pc)
-
+    
 }
 
 
@@ -70,8 +70,8 @@ plotpc <- function(pc_pcnorm) {
     if (!requireNamespace("ggplot2", quietly = TRUE)) {
         stop("ggplot2 needed for this function to work. Please install it.", call. = FALSE)
     }
-    pc_space <- ggplot2::ggplot(data,  aes(x = PC1, y = PC2, label1 = series )) + geom_point(colour = "blue")
-
+    pc_space <- ggplot2::ggplot(data, aes(x = PC1, y = PC2, label1 = series)) + geom_point(colour = "blue")
+    
     if (!requireNamespace("plotly", quietly = TRUE)) {
         stop("plotly needed for this function to work. Please install it.", call. = FALSE)
     }
