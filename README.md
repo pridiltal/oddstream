@@ -1,3 +1,6 @@
+oddstream <img src="logo.png" align="right" />
+============================================
+
 # oddstream {Outlier Detection in Data STREAMs}
 
 oddstream: A package for Outlier Detection in Data Streams
@@ -32,6 +35,6 @@ Hyndman, R. J., Wang, E., & Laptev, N. (2015). Large-scale unusual time series
 detection. In 2015 IEEE International Conference on Data Mining Workshop
 (ICDMW), (pp. 1616{1619). IEEE.
 
-Priyanga Dilini Talagala; Rob J Hyndman; Kate Smith-Miles; Sevvandi Kandanaarachchi; Mario A. Muñoz (2017). Anomaly Detection in Streaming Time Series Data. 
+Priyanga Dilini Talagala; Rob J Hyndman; Kate Smith-Miles; Sevvandi Kandanaarachchi; Mario A. Mu?oz (2017). Anomaly Detection in Streaming Time Series Data. 
 
 
