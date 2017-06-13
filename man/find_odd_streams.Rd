@@ -5,7 +5,7 @@
 \title{Detect outlying series within a collection of  sreaming time series}
 \usage{
 find_odd_streams(train_data, test_stream, update_threshold = TRUE,
-  update_threshold_freq, plot_type = c("line", "pcplot"),
+  update_threshold_freq, plot_type = c("mvtsplot", "line", "pcplot"),
   window_length = nrow(train_data), window_skip = window_length,
   concept_drift = FALSE, trials = 500)
 }
@@ -17,6 +17,13 @@ find_odd_streams(train_data, test_stream, update_threshold = TRUE,
 \item{update_threshold}{If TRUE, the threshold value to determine outlying series is updated.
 The default value is set to TRUE}
 
+\item{update_threshold_freq}{A numerical value to indicated how often the threshold should be updated.
+(After how many windows it need be updated)}
+
+\item{plot_type}{if "line" multivariate time series plot,  If "pcplot"  two dimensional PC space or if
+"mvtsplot" mvtsplot will be  produced on the current graphic device. For large complex data sets 'mvtsplot'
+is recommended}
+
 \item{window_length}{Sliding window size (Ideally this window length should be equal to the length of the
 training multivariate time series data set that is used to define the outlying threshold)}
 
@@ -26,9 +33,6 @@ training multivariate time series data set that is used to define the outlying t
 to FALSE}
 
 \item{trials}{Input for \code{set_outlier_threshold} function. Default value is set to 500.}
-
-\item{update_threshold}{A numerical value to indicated how often the threshold should be updated.
-(After how many windows it need be updated)}
 }
 \value{
 The indices of the outlying series in each window. For each window a plot is also produced on the current
@@ -54,6 +58,12 @@ find_odd_streams(train_data, test_stream , plot_type = 'line', trials = 100)
 
 # To get the PCplot
 #find_odd_streams(train_data, test_stream , plot_type = 'pcplot')
+
+# This example considers the first window  of \\code{data1} as the training dataset and the remaining as
+# the test stream
+train_data <- data1[1:150,]
+test_stream <-data1[151:1456,]
+find_odd_streams(train_data, test_stream , plot_type = "mvtsplot", trials = 100)
 }
 \references{
 Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate

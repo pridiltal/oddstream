@@ -23,12 +23,7 @@ Define a two dimensional feature space using the first two principal components 
 the fetures matrix returned by \code{extract_tsfeatures}
 }
 \examples{
-#Generate training dataset
-set.seed(123)
-nobs = 500
-nts = 50
-train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
-features <- extract_tsfeatures(train_data)
+features <- extract_tsfeatures(data1[1:100, 1:100])
 pc <- get_pc_space(features)
 
 }

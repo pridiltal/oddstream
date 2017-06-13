@@ -18,13 +18,17 @@ Description: This package proposes a framework that provides real time support f
     based representation of time series is used as the input to the model. To cope with concept drift,
     the forecast boundary for the system's typical behaviour is updated periodically.
 License: MIT + file LICENSE
-Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Suggests: mvtsplot
 Imports: pcaPP,
     stats,
     ggplot2,
     plotly,
-    ks
-Encoding: UTF-8
+    ks,
+    MASS,
+    RcppRoll,
+    mgcv,
+    moments ,
+    RColorBrewer,
+    mvtsplot
+Encoding: UTF-8   

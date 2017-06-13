@@ -42,13 +42,9 @@ This is a modification of  \code{\link[anomalous]{tsmeasures}} function of \code
 package .
 }
 \examples{
-#Generate training dataset
-set.seed(123)
-nobs = 500
-nts = 50
-train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
-features <- extract_tsfeatures(train_data)
-
+mvtsplot::mvtsplot(data1, levels=8, gcol=2, norm="global")
+features <- extract_tsfeatures(data1[500:550, ])
+plot.ts(features[, 1:10])
 }
 \references{
 {Hyndman, R. J., Wang, E., & Laptev, N. (2015). Large-scale unusual time series detection.

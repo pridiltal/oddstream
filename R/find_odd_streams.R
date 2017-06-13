@@ -10,8 +10,11 @@
 #' @param window_skip The number of steps the window should slide forward. The default is set to window_length
 #' @param update_threshold If TRUE, the threshold value to determine outlying series is updated.
 #' The default value is set to TRUE
-#' @param update_threshold A numerical value to indicated how often the threshold should be updated.
+#' @param update_threshold_freq A numerical value to indicated how often the threshold should be updated.
 #'  (After how many windows it need be updated)
+#' @param plot_type if "line" multivariate time series plot,  If "pcplot"  two dimensional PC space or if
+#' "mvtsplot" mvtsplot will be  produced on the current graphic device. For large complex data sets 'mvtsplot'
+#' is recommended
 #' @param concept_drift If TRUE, The outlying threshold will be updated after each window. The default is set
 #' to FALSE
 #' @param trials Input for \code{set_outlier_threshold} function. Default value is set to 500.
@@ -24,6 +27,7 @@
 #' @importFrom ks Hscv
 #' @importFrom plotly ggplotly
 #' @importFrom ggplot2 ggplot
+#' @importFrom mvtsplot mvtsplot
 #' @examples
 #' #Generate training dataset
 #' set.seed(890)
@@ -39,12 +43,19 @@
 #'
 #' # To get the PCplot
 #' #find_odd_streams(train_data, test_stream , plot_type = 'pcplot')
+#'
+#' # This example considers the first window  of \code{data1} as the training dataset and the remaining as
+#' # the test stream
+#' train_data <- data1[1:150,]
+#' test_stream <-data1[151:1456,]
+#' find_odd_streams(train_data, test_stream , plot_type = "mvtsplot", trials = 100)
 #' @references Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate
 #' extreme value statistics. Journal of signal processing systems, 65 (3),371-389.
 #'
 #'
-find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, update_threshold_freq, plot_type = c("line",
-    "pcplot"), window_length = nrow(train_data), window_skip = window_length, concept_drift = FALSE, trials = 500 ) {
+find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, update_threshold_freq,
+                             plot_type = c("mvtsplot", "line", "pcplot"), window_length = nrow(train_data),
+                             window_skip = window_length, concept_drift = FALSE, trials = 500 ) {
 
     train_features <- extract_tsfeatures(train_data)
     pc <- get_pc_space(train_features)
@@ -85,6 +96,11 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
                 text(pctest[outliers, 1], pctest[outliers, 2], labels = outliers, pos = 1, cex = 0.8, col = "black")
             }
 
+        }
+        if (plot_type == "mvtsplot") {
+           par(pty = "m")
+           colnames(window_data) <- 1:ncol(window_data)
+           mvtsplot::mvtsplot(window_data, levels=8, gcol=2, norm="global")
         }
 
 

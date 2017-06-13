@@ -19,11 +19,15 @@ process. Then a sliding window is used to test for anomalous series within the n
 of series. Feature based representation of time series is used as the input to the model. To cope with 
 concept drift, the forecast boundary for the system's typical behaviour is updated periodically. 
 
+This repository contains the development version of the R package \code{oddstream}.
+
 Installation
 ------------
-
+The development version can be installed as follows:
 ``` r
-devtools::install_github("pridiltal/oddstream")
+install.packages("devtools")
+library(devtools)
+install_github("pridiltal/oddstream")
 ```
 
 Usage
