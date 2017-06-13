@@ -4,7 +4,7 @@
 \alias{set_outlier_threshold}
 \title{Set a threshold for outlier detection}
 \usage{
-set_outlier_threshold(pc_pcnorm, p_rate = 0.001, trials = 300)
+set_outlier_threshold(pc_pcnorm, p_rate = 0.001, trials = 500)
 }
 \arguments{
 \item{pc_pcnorm}{The scores of the first two pricipal components returned by \code{\link{get_pc_space}}}

@@ -6,7 +6,8 @@
 \usage{
 find_odd_streams(train_data, test_stream, update_threshold = TRUE,
   update_threshold_freq, plot_type = c("line", "pcplot"),
-  window_length = nrow(train_data), window_skip = window_length)
+  window_length = nrow(train_data), window_skip = window_length,
+  concept_drift = FALSE, trials = 500)
 }
 \arguments{
 \item{train_data}{A multivariate time series data set that represents the typical behaviour of the system.}
@@ -20,6 +21,11 @@ The default value is set to TRUE}
 training multivariate time series data set that is used to define the outlying threshold)}
 
 \item{window_skip}{The number of steps the window should slide forward. The default is set to window_length}
+
+\item{concept_drift}{If TRUE, The outlying threshold will be updated after each window. The default is set
+to FALSE}
+
+\item{trials}{Input for \code{set_outlier_threshold} function. Default value is set to 500.}
 
 \item{update_threshold}{A numerical value to indicated how often the threshold should be updated.
 (After how many windows it need be updated)}
@@ -35,17 +41,19 @@ behaviour can be updated periodically.
 }
 \examples{
 #Generate training dataset
-set.seed(123)
-nobs = 500
-nts = 50
+set.seed(890)
+nobs = 250
+nts = 100
 train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
 # Generate test stream with some outliying series
 nobs = 15000
 test_stream <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
-test_stream[200:1400, 20:25] = test_stream[200:1400, 20:25] * 2
-test_stream[3020:3550, 20:25] = test_stream[3020:3550, 20:25] * 1.5
-find_odd_streams(train_data, test_stream , plot_type = 'line', window_skip = 100)
+test_stream[360:1060, 20:25] = test_stream[360:1060, 20:25] * 1.75
+test_stream[2550:3550, 20:25] =  test_stream[2550:3550, 20:25] * 2
+find_odd_streams(train_data, test_stream , plot_type = 'line', trials = 100)
 
+# To get the PCplot
+#find_odd_streams(train_data, test_stream , plot_type = 'pcplot')
 }
 \references{
 Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate
