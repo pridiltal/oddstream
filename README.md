@@ -1,7 +1,7 @@
 oddstream <img src="logo.png" align="right" height="150" />
 ============================================
 
-# ![logo](https://raw.githubusercontent.com/pridiltal/oddstream/master/logo.png) oddstream {Outlier Detection in Data STREAMs}
+# oddstream {Outlier Detection in Data STREAMs}
 ---------------------------------------------------
 oddstream: A package for Outlier Detection in Data Streams
 
