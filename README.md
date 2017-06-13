@@ -37,16 +37,20 @@ package?oddstream
 
 #Example 1
 #Generate training dataset
-set.seed(123)
-nobs = 500
-nts = 50
+set.seed(890)
+nobs = 250
+nts = 100
 train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
 # Generate test stream with some outliying series
 nobs = 15000
 test_stream <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
-test_stream[200:1400, 20:25] = test_stream[200:1400, 20:25] * 2
-test_stream[3020:3550, 20:25] = test_stream[3020:3550, 20:25] * 1.5
-find_odd_streams(train_data, test_stream , plot_type = 'line', window_skip = 100)
+test_stream[360:1060, 20:25] = test_stream[360:1060, 20:25] * 1.75
+test_stream[2550:3550, 20:25] =  test_stream[2550:3550, 20:25] * 2
+find_odd_streams(train_data, test_stream , plot_type = 'line', trials = 100)
+
+#Example 2
+# To get the PCplot
+find_odd_streams(train_data, test_stream , plot_type = 'pcplot')
 
 ````
 
