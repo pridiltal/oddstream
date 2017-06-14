@@ -25,9 +25,8 @@ Installation
 ------------
 The development version can be installed as follows:
 ``` r
-install.packages("devtools")
-library(devtools)
-install_github("pridiltal/oddstream")
+#install.packages("devtools")
+devtools::install_github("pridiltal/oddstream")
 ```
 
 Usage
