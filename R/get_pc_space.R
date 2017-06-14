@@ -24,7 +24,7 @@ get_pc_space <- function(features, robust = TRUE) {
         pc <- pcaPP::PCAproj(features, ncol(features), scale = sd, center = mean)
         pcnorm <- pc$scores[, 1:2]
         colnames(pcnorm) <- c("PC1", "PC2")
-        pc <- list(pcnorm = pcnorm, center = pc$center, scale = pc$scale, rotation = pc$loadings[, 1:ncol(f1)])
+        pc <- list(pcnorm = pcnorm, center = pc$center, scale = pc$scale, rotation = pc$loadings[, 1:ncol(features)])
     } else {
         pc <- stats::prcomp(features, center = TRUE, scale. = TRUE)
         pcnorm <- pc$x[, 1:2]
