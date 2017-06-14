@@ -53,7 +53,7 @@ find_odd_streams(train_data, test_stream , plot_type = 'line', trials = 100)
 
 #Example 2
 # To get the PCplot
-find_odd_streams(train_data, test_stream , plot_type = 'pcplot')
+find_odd_streams(train_data, test_stream , plot_type = 'mvtsplot')
 
 ````
 
