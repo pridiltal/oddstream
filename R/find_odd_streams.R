@@ -126,5 +126,5 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
         i <- i + 1
 
     }
-    dev.off()
+   # dev.off()
 }
