@@ -65,8 +65,7 @@ Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with mul
 
 Hyndman, R. J., Wang, E., & Laptev, N. (2015). Large-scale unusual time series
 detection. In 2015 IEEE International Conference on Data Mining Workshop
-(ICDMW), (pp. 1616{1619). IEEE.
+(ICDMW), (pp. 1616-1619). IEEE.
 
-Priyanga Dilini Talagala; Rob J Hyndman; Kate Smith-Miles; Sevvandi Kandanaarachchi; Mario A. Muñoz (2017). Anomaly Detection in Streaming Time Series Data. 
 
 
