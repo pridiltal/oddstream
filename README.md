@@ -52,7 +52,7 @@ test_stream[2550:3550, 20:25] =  test_stream[2550:3550, 20:25] * 2
 find_odd_streams(train_data, test_stream , plot_type = 'line', trials = 100)
 
 #Example 2
-# To get the PCplot
+# To get mvtsplot
 find_odd_streams(train_data, test_stream , plot_type = 'mvtsplot')
 
 ````
@@ -61,7 +61,7 @@ find_odd_streams(train_data, test_stream , plot_type = 'mvtsplot')
 References
 ===========
 
-Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate extreme value statistics. Journal of signal processing systems, 65 (3),371-389.
+Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate extreme value statistics. Journal of signal processing systems, 65 (3), (pp. 371-389).
 
 Hyndman, R. J., Wang, E., & Laptev, N. (2015). Large-scale unusual time series
 detection. In 2015 IEEE International Conference on Data Mining Workshop
