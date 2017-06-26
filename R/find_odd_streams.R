@@ -44,10 +44,10 @@
 #' # To get the PCplot
 #' #find_odd_streams(train_data, test_stream , plot_type = 'pcplot')
 #'
-#' # This example considers the first window  of \code{data1} as the training dataset and the remaining as
+#' # This example considers the first window  of anomalous_stream data set as the training dataset and the remaining as
 #' # the test stream
-#' train_data <- data1[1:150,]
-#' test_stream <-data1[151:1456,]
+#' train_data <- anomalous_stream[1:150,]
+#' test_stream <-anomalous_stream[151:1456,]
 #' find_odd_streams(train_data, test_stream , plot_type = "mvtsplot", trials = 100)
 #' @references Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate
 #' extreme value statistics. Journal of signal processing systems, 65 (3),371-389.

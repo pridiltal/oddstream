@@ -38,8 +38,8 @@
 #'
 #' {Fulcher, B. D. (2012). Highly comparative time-series analysis. PhD thesis, University of Oxford.}
 #' @examples
-#' mvtsplot::mvtsplot(data1, levels=8, gcol=2, norm="global")
-#' features <- extract_tsfeatures(data1[500:550, ])
+#' mvtsplot::mvtsplot(anomalous_stream, levels=8, gcol=2, norm="global")
+#' features <- extract_tsfeatures(anomalous_stream[500:550, ])
 #' plot.ts(features[, 1:10])
 extract_tsfeatures <- function(y, normalise = TRUE, width = ifelse(frequency(y) > 1, frequency(y), 10), window = width) {
 

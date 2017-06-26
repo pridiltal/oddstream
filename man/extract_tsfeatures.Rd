@@ -42,8 +42,8 @@ This is a modification of  \code{\link[anomalous]{tsmeasures}} function of \code
 package .
 }
 \examples{
-mvtsplot::mvtsplot(data1, levels=8, gcol=2, norm="global")
-features <- extract_tsfeatures(data1[500:550, ])
+mvtsplot::mvtsplot(anomalous_stream, levels=8, gcol=2, norm="global")
+features <- extract_tsfeatures(anomalous_stream[500:550, ])
 plot.ts(features[, 1:10])
 }
 \references{

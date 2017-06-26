@@ -23,7 +23,7 @@ Define a two dimensional feature space using the first two principal components 
 the fetures matrix returned by \code{extract_tsfeatures}
 }
 \examples{
-features <- extract_tsfeatures(data1[1:100, 1:100])
+features <- extract_tsfeatures(anomalous_stream[1:100, 1:100])
 pc <- get_pc_space(features)
 
 }

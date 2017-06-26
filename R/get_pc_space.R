@@ -15,7 +15,7 @@
 #' @importFrom pcaPP PCAproj
 #' @importFrom stats prcomp
 #' @examples
-#' features <- extract_tsfeatures(data1[1:100, 1:100])
+#' features <- extract_tsfeatures(anomalous_stream[1:100, 1:100])
 #' pc <- get_pc_space(features)
 #'
 get_pc_space <- function(features, robust = TRUE) {
@@ -51,7 +51,7 @@ get_pc_space <- function(features, robust = TRUE) {
 #' @importFrom ggplot2 ggplot
 #' @importFrom plotly ggplotly
 #' @examples
-#' features <- extract_tsfeatures(data1[1:100, 1:100])
+#' features <- extract_tsfeatures(anomalous_stream[1:100, 1:100])
 #' pc <- get_pc_space(features)
 #' plotpc(pc$pcnorm)
 plotpc <- function(pc_pcnorm) {

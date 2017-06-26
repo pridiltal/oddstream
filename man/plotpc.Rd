@@ -18,7 +18,7 @@ Plot a two dimensional feature space on the current graphics device using the fi
 pricipal component returned by \code{\link{get_pc_space}}
 }
 \examples{
-features <- extract_tsfeatures(data1[1:100, 1:100])
+features <- extract_tsfeatures(anomalous_stream[1:100, 1:100])
 pc <- get_pc_space(features)
 plotpc(pc$pcnorm)
 }
