@@ -67,5 +67,3 @@ Hyndman, R. J., Wang, E., & Laptev, N. (2015). Large-scale unusual time series
 detection. In 2015 IEEE International Conference on Data Mining Workshop
 (ICDMW), (pp. 1616-1619). IEEE.
 
-
-

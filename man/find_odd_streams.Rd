@@ -5,9 +5,10 @@
 \title{Detect outlying series within a collection of  sreaming time series}
 \usage{
 find_odd_streams(train_data, test_stream, update_threshold = TRUE,
-  update_threshold_freq, plot_type = c("mvtsplot", "line", "pcplot"),
-  window_length = nrow(train_data), window_skip = window_length,
-  concept_drift = FALSE, trials = 500)
+  update_threshold_freq, plot_type = c("mvtsplot", "line", "pcplot",
+  "out_location_plot"), window_length = nrow(train_data),
+  window_skip = window_length, concept_drift = FALSE, trials = 500,
+  pc_boundary = 50)
 }
 \arguments{
 \item{train_data}{A multivariate time series data set that represents the typical behaviour of the system.}
@@ -21,8 +22,8 @@ The default value is set to TRUE}
 (After how many windows it need be updated)}
 
 \item{plot_type}{if "line" multivariate time series plot,  If "pcplot"  two dimensional PC space or if
-"mvtsplot" mvtsplot will be  produced on the current graphic device. For large complex data sets 'mvtsplot'
-is recommended}
+"mvtsplot" mvtsplot will be  produced on the current graphic device. For large complex data sets 'mvtsplot' or
+ 'out_location_plot' are recommended}
 
 \item{window_length}{Sliding window size (Ideally this window length should be equal to the length of the
 training multivariate time series data set that is used to define the outlying threshold)}
@@ -33,6 +34,8 @@ training multivariate time series data set that is used to define the outlying t
 to FALSE}
 
 \item{trials}{Input for \code{set_outlier_threshold} function. Default value is set to 500.}
+
+\item{pc_boundary}{Expand the pc plot limits by this amount. Default value is set to 50}
 }
 \value{
 The indices of the outlying series in each window. For each window a plot is also produced on the current
@@ -59,11 +62,11 @@ find_odd_streams(train_data, test_stream , plot_type = 'line', trials = 100)
 # To get the PCplot
 #find_odd_streams(train_data, test_stream , plot_type = 'pcplot')
 
-# This example considers the first window  of anomalous_stream data set as the training dataset and the remaining as
+# Considers the first window  of the data set as the training set and the remaining as
 # the test stream
-train_data <- anomalous_stream[1:150,]
-test_stream <-anomalous_stream[151:1456,]
-find_odd_streams(train_data, test_stream , plot_type = "mvtsplot", trials = 100)
+train_data <- anomalous_stream[1:100,]
+test_stream <-anomalous_stream[101:1456,]
+find_odd_streams(train_data, test_stream , plot_type = "out_location_plot", trials = 100)
 }
 \references{
 Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate

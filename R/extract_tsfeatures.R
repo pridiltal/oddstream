@@ -3,10 +3,10 @@
 #' @description This function extract time series features from a collection of time series.
 #' This is a modification of  \code{\link[anomalous]{tsmeasures}} function of \code{\link[anomalous]{anomalous}}
 #' package .
-#' @param data A multivariate time series
 #' @param normalise If TRUE, each time series is scaled to be normally distributed with mean 0 and sd 1
 #' @param width A window size for variance change, level shift and lumpiness
 #' @param window A window size for KLscore
+#' @param y A multivariate time serie
 #' @return An object of class features with the following components:
 #'   \item{mean}{Mean}
 #'   \item{var}{Variance}
@@ -33,6 +33,7 @@
 #' @importFrom RcppRoll roll_mean
 #' @importFrom RcppRoll roll_var
 #' @importFrom mgcv gam
+#' @import stats
 #' @references {Hyndman, R. J., Wang, E., & Laptev, N. (2015). Large-scale unusual time series detection.
 #' In 2015 IEEE International Conference on Data Mining Workshop (ICDMW), (pp. 1616-1619). IEEE.}\cr
 #'

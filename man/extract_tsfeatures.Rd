@@ -8,13 +8,13 @@ extract_tsfeatures(y, normalise = TRUE, width = ifelse(frequency(y) > 1,
   frequency(y), 10), window = width)
 }
 \arguments{
+\item{y}{A multivariate time serie}
+
 \item{normalise}{If TRUE, each time series is scaled to be normally distributed with mean 0 and sd 1}
 
 \item{width}{A window size for variance change, level shift and lumpiness}
 
 \item{window}{A window size for KLscore}
-
-\item{data}{A multivariate time series}
 }
 \value{
 An object of class features with the following components:

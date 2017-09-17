@@ -28,6 +28,7 @@ get_pc_space <- function(features, robust = TRUE) {
     } else {
         pc <- stats::prcomp(features, center = TRUE, scale. = TRUE)
         pcnorm <- pc$x[, 1:2]
+        colnames(pcnorm) <- c("PC1", "PC2")
         pc <- list(pcnorm = pcnorm, center = pc$center, scale = pc$scale, rotation = pc$rotation)
     }
 
@@ -48,25 +49,21 @@ get_pc_space <- function(features, robust = TRUE) {
 #' @seealso \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
 #' \code{\link{set_outlier_threshold}}
 #' @export
-#' @importFrom ggplot2 ggplot
-#' @importFrom plotly ggplotly
+#' @import ggplot2
+#' @importFrom tibble as_tibble
 #' @examples
 #' features <- extract_tsfeatures(anomalous_stream[1:100, 1:100])
 #' pc <- get_pc_space(features)
 #' plotpc(pc$pcnorm)
 plotpc <- function(pc_pcnorm) {
-    data <- data.frame(cbind(pc_pcnorm, series = 1:nrow(pc_pcnorm)))
-    colnames(data) <- c("PC1", "PC2", "series")
+    data <- tibble::as_tibble(pc_pcnorm)
     if (!requireNamespace("ggplot2", quietly = TRUE)) {
-
        stop("ggplot2 needed for this function to work. Please install it.", call. = FALSE)
     }
-    pc_space <- ggplot2::ggplot(data, aes(x = PC1, y = PC2, label1 = series)) + geom_point(colour = "blue")
-
-   if (!requireNamespace("plotly", quietly = TRUE)) {
-       stop("plotly needed for this function to work. Please install it.", call. = FALSE)
-   }
-   plotly::ggplotly(pc_space)
+    pc_space <- ggplot(data) +
+      geom_point(aes_string(x = 'PC1', y = 'PC2'), colour = "blue", size = 2) +
+      theme(aspect.ratio = 1)
+    print(pc_space)
 }
 
 

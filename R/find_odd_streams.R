@@ -13,11 +13,12 @@
 #' @param update_threshold_freq A numerical value to indicated how often the threshold should be updated.
 #'  (After how many windows it need be updated)
 #' @param plot_type if "line" multivariate time series plot,  If "pcplot"  two dimensional PC space or if
-#' "mvtsplot" mvtsplot will be  produced on the current graphic device. For large complex data sets 'mvtsplot'
-#' is recommended
+#' "mvtsplot" mvtsplot will be  produced on the current graphic device. For large complex data sets 'mvtsplot' or
+#'  'out_location_plot' are recommended
 #' @param concept_drift If TRUE, The outlying threshold will be updated after each window. The default is set
 #' to FALSE
 #' @param trials Input for \code{set_outlier_threshold} function. Default value is set to 500.
+#' @param pc_boundary Expand the pc plot limits by this amount. Default value is set to 50
 #' @return The indices of the outlying series in each window. For each window a plot is also produced on the current
 #' graphic device
 #' @seealso  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}}, \code{\link{set_outlier_threshold}},
@@ -25,9 +26,13 @@
 #' @export
 #' @importFrom ks kde
 #' @importFrom ks Hscv
-#' @importFrom plotly ggplotly
-#' @importFrom ggplot2 ggplot
 #' @importFrom mvtsplot mvtsplot
+#' @importFrom tibble as_tibble
+#' @importFrom reshape melt
+#' @importFrom dplyr mutate
+#' @import graphics
+#' @import stats
+#' @import ggplot2
 #' @examples
 #' #Generate training dataset
 #' set.seed(890)
@@ -44,20 +49,21 @@
 #' # To get the PCplot
 #' #find_odd_streams(train_data, test_stream , plot_type = 'pcplot')
 #'
-#' # This example considers the first window  of anomalous_stream data set as the training dataset and the remaining as
+#' # Considers the first window  of the data set as the training set and the remaining as
 #' # the test stream
-#' train_data <- anomalous_stream[1:150,]
-#' test_stream <-anomalous_stream[151:1456,]
-#' find_odd_streams(train_data, test_stream , plot_type = "mvtsplot", trials = 100)
+#' train_data <- anomalous_stream[1:100,]
+#' test_stream <-anomalous_stream[101:1456,]
+#' find_odd_streams(train_data, test_stream , plot_type = "out_location_plot", trials = 100)
 #' @references Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate
 #' extreme value statistics. Journal of signal processing systems, 65 (3),371-389.
 #'
 #'
 find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, update_threshold_freq,
-                             plot_type = c("mvtsplot", "line", "pcplot"), window_length = nrow(train_data),
-                             window_skip = window_length, concept_drift = FALSE, trials = 500 ) {
+                             plot_type = c("mvtsplot", "line", "pcplot", "out_location_plot"), window_length = nrow(train_data),
+                             window_skip = window_length, concept_drift = FALSE, trials = 500, pc_boundary = 50) {
 
     train_features <- extract_tsfeatures(train_data)
+    train_features <- scale(train_features, center = TRUE, scale = TRUE)
     pc <- get_pc_space(train_features)
     t <- set_outlier_threshold(pc$pcnorm, trials = trials )
     start <- seq(1, nrow(test_stream), window_skip)
@@ -68,39 +74,73 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
         window_data <- test_stream[start[i]:end[i], ]
 
         window_features <- extract_tsfeatures(window_data)
+        window_features <- scale(window_features, center = TRUE, scale = TRUE)
         pc_test <- scale(window_features, pc$center, pc$scale) %*% pc$rotation
         pctest <- pc_test[, 1:2]
         fhat_test <- ks::kde(x = pc$pcnorm, H = t$H_scv, compute.cont = TRUE, eval.points = pctest)
         outliers <- which(fhat_test$estimate < t$threshold_fnx)
-
-
+        colnames(pctest) <- c("PC1", "PC2")
+        pctest <- tibble::as_tibble(pctest)
+        outlier_names <- paste("Series", outliers)
         if (plot_type == "line") {
-            par(pty = "s")
-            plot.ts(as.ts(window_data), plot.type = "single", main = paste("data from: ", start[i], " to: ", end[i]), ylim = c(0,
-                range(train_data)[2] * 4), ylab = "Value")
-            if (length(outliers) > 0) {
-                f <- function(x) {
-                  lines(window_data[, x], col = "red", lwd = 2)
-                }
-                lapply(outliers, f)
-            }
+            window_data_melt <- reshape::melt(window_data)
+            window_data_melt <- dplyr::mutate(window_data_melt,
+                                       type = ifelse(X2 %in% outlier_names,
+                                                     "outlier" ,"normal"))
+            line_plot <- ggplot(window_data_melt) +
+              geom_line(aes_(x=~X1, y=~value, group = ~X2, color = ~type),
+                        alpha=0.9, size = I(0.5))+
+              scale_colour_manual(name="Type",
+                                  values = c("outlier"="red", "normal"="darkgray")) +
+              xlab("Time") +
+              ggtitle(paste("Data from: ", start[i], " to: ", end[i]))
+
+            print(line_plot)
         }
+
         if (plot_type == "pcplot") {
-            par(pty = "s")
-            plot(t$fhat2, drawpoints = FALSE, abs.cont = t$threshold_fnx, col = "red", add = F, xlim = range(t$fhat2$x[, 1]) *
-                40, ylim = range(t$fhat2$x[, 2]) * 40, main = paste("data from: ", start[i], " to: ", end[i]))
-            points(pctest[, 1], pctest[, 2], col = "grey", pch = 16)
+            pc_norm <- tibble::as_tibble(pc$pcnorm)
+            pc_norm <- dplyr::mutate(pc_norm, Series = 1:nrow(pc_norm))
+            p1 <-  ggplot(pc_norm) +
+            geom_point(aes(x=PC1, y= PC2),alpha = 0.5, color = "gray")+
+            theme(aspect.ratio = 1) +
+            expand_limits(y = c(-pc_boundary, pc_boundary),
+                          x = c(-pc_boundary,pc_boundary))
 
-            if (length(outliers) > 0) {
-                points(pctest[outliers, 1], pctest[outliers, 2], col = "red", pch = 16)
-                text(pctest[outliers, 1], pctest[outliers, 2], labels = outliers, pos = 1, cex = 0.8, col = "black")
-            }
+
+            pc_test <- dplyr::mutate(pctest, Series = 1:nrow(pctest))
+            pc_test <- dplyr::mutate(pc_test, type = ifelse(Series %in% outliers,
+                                                            "outlier" ,"normal"))
+
+            labeled.dat <- pc_test[pc_test$Series %in% outliers ,]
+            p2 <-  p1 +
+              geom_point(data = pc_test, alpha = 0.5,
+                         aes(x=PC1, y= PC2, colour = type)) +
+              scale_colour_manual(name="Type",
+                                  values = c("outlier"="red", "normal"="lightblue")) +
+              ggtitle(paste("Data from: ", start[i], " to: ", end[i])) +
+              geom_text( data = labeled.dat,aes(x=PC1, y= PC2, label = Series), hjust = 2)
+            print(p2)
+
 
         }
+        if (plot_type == "out_location_plot") {
+
+          pctest <- tibble::as_tibble(pctest)
+          pc_test <- dplyr::mutate(pctest, Series = 1:nrow(pctest))
+          pc_test <- dplyr::mutate(pc_test, type = ifelse(Series %in% outliers,
+                                                          "outlier" ,"normal"))
+
+          out_plot <- ggplot(pc_test, aes(x= Series, y= type)) +
+            geom_point()+
+            ggtitle(paste("Data from: ", start[i], " to: ", end[i]))
+          print(out_plot)
+        }
+
         if (plot_type == "mvtsplot") {
-           par(pty = "m")
-           colnames(window_data) <- 1:ncol(window_data)
-           mvtsplot::mvtsplot(window_data, levels=8, gcol=2, norm="global")
+          par(pty = "m")
+          colnames(window_data) <- 1:ncol(window_data)
+          mvtsplot::mvtsplot(window_data, levels=8, gcol=2, norm="global")
         }
 
 
