@@ -4,10 +4,16 @@
 \alias{plotpc}
 \title{Plot a two dimensional feature space on the current graphics device.}
 \usage{
-plotpc(pc_pcnorm)
+plotpc(pc_pcnorm, colour = "blue", alpha = 0.8, pc_boundary = 10)
 }
 \arguments{
 \item{pc_pcnorm}{The scores of the first two pricipal components returned by \code{\link{get_pc_space}}}
+
+\item{colour}{The color of the point. Default is set to "blue"}
+
+\item{alpha}{The transparency of the point range from 0 to 1. (default: 0.8)}
+
+\item{pc_boundary}{Expand the pc plot limits by this amount. Default value is set to 10}
 }
 \value{
 A graphical representation of the two dimensional feature space will be produced on the current graphic

@@ -44,6 +44,9 @@ get_pc_space <- function(features, robust = TRUE) {
 #' @description Plot a two dimensional feature space on the current graphics device using the first two
 #' pricipal component returned by \code{\link{get_pc_space}}
 #' @param pc_pcnorm The scores of the first two pricipal components returned by \code{\link{get_pc_space}}
+#' @param colour The color of the point. Default is set to "blue"
+#' @param alpha  The transparency of the point range from 0 to 1. (default: 0.8)
+#' @param pc_boundary Expand the pc plot limits by this amount. Default value is set to 10
 #' @return A graphical representation of the two dimensional feature space will be produced on the current graphic
 #' device.
 #' @seealso \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
@@ -55,14 +58,16 @@ get_pc_space <- function(features, robust = TRUE) {
 #' features <- extract_tsfeatures(anomalous_stream[1:100, 1:100])
 #' pc <- get_pc_space(features)
 #' plotpc(pc$pcnorm)
-plotpc <- function(pc_pcnorm) {
+plotpc <- function(pc_pcnorm, colour = "blue", alpha = 0.8, pc_boundary = 10) {
     data <- tibble::as_tibble(pc_pcnorm)
     if (!requireNamespace("ggplot2", quietly = TRUE)) {
        stop("ggplot2 needed for this function to work. Please install it.", call. = FALSE)
     }
-    pc_space <- ggplot(data) +
-      geom_point(aes_string(x = 'PC1', y = 'PC2'), colour = "blue", size = 2) +
-      theme(aspect.ratio = 1)
+    pc_space <- ggplot2::ggplot(data) +
+      geom_point(aes_string(x ="PC1", y = "PC2"), color = colour, size = 2, alpha = alpha) +
+      theme(aspect.ratio = 1,) +
+      expand_limits(y = c(-pc_boundary, pc_boundary),
+                    x = c(-pc_boundary,pc_boundary))
     print(pc_space)
 }
 
