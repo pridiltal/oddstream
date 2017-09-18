@@ -93,8 +93,9 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
               scale_colour_manual(name="Type",
                                   values = c("outlier"="red", "normal"="darkgray")) +
               xlab("Time") +
-              ggtitle(paste("Data from: ", start[i], " to: ", end[i]))
-
+              ggtitle(paste("Data from: ", start[i], " to: ", end[i]))+
+              #expand_limits(y = c(-pc_boundary, pc_boundary))
+              ylim(-5,50)
             print(line_plot)
         }
 
