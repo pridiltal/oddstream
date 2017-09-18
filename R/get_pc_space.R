@@ -58,7 +58,7 @@ get_pc_space <- function(features, robust = TRUE) {
 #' features <- extract_tsfeatures(anomalous_stream[1:100, 1:100])
 #' pc <- get_pc_space(features)
 #' plotpc(pc$pcnorm)
-plotpc <- function(pc_pcnorm, colour = "blue", alpha = 0.8, pc_boundary = 10) {
+plotpc <- function(pc_pcnorm, colour = "cornflowerblue", alpha = 0.8, pc_boundary = 10) {
     data <- tibble::as_tibble(pc_pcnorm)
     if (!requireNamespace("ggplot2", quietly = TRUE)) {
        stop("ggplot2 needed for this function to work. Please install it.", call. = FALSE)

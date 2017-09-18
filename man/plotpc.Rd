@@ -4,7 +4,8 @@
 \alias{plotpc}
 \title{Plot a two dimensional feature space on the current graphics device.}
 \usage{
-plotpc(pc_pcnorm, colour = "blue", alpha = 0.8, pc_boundary = 10)
+plotpc(pc_pcnorm, colour = "cornflowerblue", alpha = 0.8,
+  pc_boundary = 10)
 }
 \arguments{
 \item{pc_pcnorm}{The scores of the first two pricipal components returned by \code{\link{get_pc_space}}}
