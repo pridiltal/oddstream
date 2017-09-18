@@ -24,7 +24,6 @@ RoxygenNote: 6.0.1
 Imports: pcaPP,
     stats,
     ggplot2,
-    plotly,
     ks,
     MASS,
     RcppRoll,
