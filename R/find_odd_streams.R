@@ -94,8 +94,8 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
                                   values = c("outlier"="red", "normal"="darkgray")) +
               xlab("Time") +
               ggtitle(paste("Data from: ", start[i], " to: ", end[i]))+
-              #expand_limits(y = c(-pc_boundary, pc_boundary))
-              ylim(-5,50)
+              expand_limits(y = c(-pc_boundary, pc_boundary))
+              #ylim(-5,50)
             print(line_plot)
         }
 
