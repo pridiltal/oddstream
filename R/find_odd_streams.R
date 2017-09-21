@@ -155,13 +155,10 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
         if (concept_drift == TRUE)
         {
           if (length(outliers) > 0) {
-             train_features <- window_features[-outliers, ]
+          t <- set_outlier_threshold(pctest[-outliers,], trials = trials )
           } else {
-             train_features <- window_features
+            t <- set_outlier_threshold(pctest, trials = trials )
           }
-
-          pc <- get_pc_space(train_features)
-          t <- set_outlier_threshold(pc$pcnorm, trials = trials)
         }
 
         i <- i + 1
