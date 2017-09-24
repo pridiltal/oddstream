@@ -134,6 +134,8 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
 
           out_plot <- ggplot(pc_test, aes(x= Series, y= type)) +
             geom_point()+
+            scale_colour_manual(name="Type",
+                                values = c("outlier"="red", "normal"="lightblue")) +
             ggtitle(paste("Data from: ", start[i], " to: ", end[i]))
           print(out_plot)
         }
@@ -156,8 +158,10 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
         {
           if (length(outliers) > 0) {
           t <- set_outlier_threshold(pctest[-outliers,], trials = trials )
+            pc$pcnorm <- pctest[-outliers,]
           } else {
             t <- set_outlier_threshold(pctest, trials = trials )
+            pc$pcnorm <- pctest
           }
         }
 
