@@ -81,7 +81,8 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
         outliers <- which(fhat_test$estimate < t$threshold_fnx)
         colnames(pctest) <- c("PC1", "PC2")
         pctest <- tibble::as_tibble(pctest)
-        outlier_names <- paste("Series", outliers)
+        outlier_names <- paste("series", outliers, sep= " ")
+
         if (plot_type == "line") {
             window_data_melt <- reshape::melt(window_data)
             window_data_melt <- dplyr::mutate(window_data_melt,
@@ -89,7 +90,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
                                                      "outlier" ,"normal"))
             line_plot <- ggplot(window_data_melt) +
               geom_line(aes_(x=~X1, y=~value, group = ~X2, color = ~type),
-                        alpha=0.9, size = I(0.5))+
+                        alpha=0.8, size = I(0.5))+
               scale_colour_manual(name="Type",
                                   values = c("outlier"="red", "normal"="darkgray")) +
               xlab("Time") +
