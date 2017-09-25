@@ -132,11 +132,13 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
           pc_test <- dplyr::mutate(pc_test, type = ifelse(Series %in% outliers,
                                                           "outlier" ,"normal"))
 
-          out_plot <- ggplot(pc_test, aes(x= Series, y= type)) +
+          out_plot <- ggplot(pc_test, aes(x= type, y= Series, colour = type)) +
             geom_point()+
-            scale_colour_manual(name="Type",
-                                values = c("outlier"="red", "normal"="lightblue")) +
+            theme(aspect.ratio = 2) +
+            scale_colour_manual(name="Type", values = c("outlier"="red",
+                                                        "normal"="lightblue"))+
             ggtitle(paste("Data from: ", start[i], " to: ", end[i]))
+
           print(out_plot)
         }
 
