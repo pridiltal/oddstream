@@ -69,7 +69,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
     start <- seq(1, nrow(test_stream), window_skip)
     end <- seq(window_length, nrow(test_stream), window_skip)
 
-    i <- 1
+    i <- 2
     while (i <= length(end)) {
         window_data <- test_stream[start[i]:end[i], ]
 
@@ -93,7 +93,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
 
           window_data_melt <- reshape::melt(as.matrix(window_data))
           window_data_melt <- dplyr::mutate(window_data_melt,
-                                            type = ifelse(X2 %in% outlier_names,
+                                            type = ifelse(tolower(X2) %in% tolower(outlier_names),
                                                           "outlier" ,"normal"))
           line_plot <- ggplot(window_data_melt) +
             geom_line(aes_(x=~X1, y=~value, group = ~X2, color = ~type),
