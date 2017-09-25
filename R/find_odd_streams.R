@@ -84,20 +84,27 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
         outlier_names <- paste("series", outliers, sep= " ")
 
         if (plot_type == "line") {
-            window_data_melt <- reshape::melt(window_data)
-            window_data_melt <- dplyr::mutate(window_data_melt,
-                                       type = ifelse(X2 %in% outlier_names,
-                                                     "outlier" ,"normal"))
-            line_plot <- ggplot(window_data_melt) +
-              geom_line(aes_(x=~X1, y=~value, group = ~X2, color = ~type),
-                        alpha=0.8, size = I(0.5))+
-              scale_colour_manual(name="Type",
-                                  values = c("outlier"="red", "normal"="darkgray")) +
-              xlab("Time") +
-              ggtitle(paste("Data from: ", start[i], " to: ", end[i]))+
-              expand_limits(y = c(-pc_boundary, pc_boundary))
-              #ylim(-5,50)
-            print(line_plot)
+
+          if(!(is.matrix(window_data)))
+          {
+            row.names(window_data) <- NULL
+            window_data <- data.matrix(window_data)
+          }
+
+          window_data_melt <- reshape::melt(as.matrix(window_data))
+          window_data_melt <- dplyr::mutate(window_data_melt,
+                                            type = ifelse(X2 %in% outlier_names,
+                                                          "outlier" ,"normal"))
+          line_plot <- ggplot(window_data_melt) +
+            geom_line(aes_(x=~X1, y=~value, group = ~X2, color = ~type),
+                      alpha=0.8, size = I(0.5))+
+            scale_colour_manual(name="Type",
+                                values = c("outlier"="red", "normal"="darkgray")) +
+            xlab("Time") +
+            ggtitle(paste("Data from: ", start[i], " to: ", end[i]))+
+            expand_limits(y = c(-pc_boundary, pc_boundary))
+          #ylim(-5,50)
+          print(line_plot)
         }
 
         if (plot_type == "pcplot") {
