@@ -2,6 +2,7 @@ oddstream <img src="logo.png" align="right" height="150" />
 ============================================
 [![Travis-CI Build Status](https://travis-ci.org/pridiltal/oddstream.svg?branch=master)](https://travis-ci.org/pridiltal/oddstream)
 
+
 # oddstream {Outlier Detection in Data STREAMs}
 ---------------------------------------------------
 oddstream: A package for Outlier Detection in Data Streams
