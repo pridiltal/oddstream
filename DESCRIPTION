@@ -36,3 +36,4 @@ Imports: pcaPP,
     dplyr,
     graphics
 Encoding: UTF-8   
+Suggests: testthat

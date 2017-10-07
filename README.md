@@ -1,7 +1,7 @@
 oddstream <img src="logo.png" align="right" height="150" />
 ============================================
 [![Travis-CI Build Status](https://travis-ci.org/pridiltal/oddstream.svg?branch=master)](https://travis-ci.org/pridiltal/oddstream)
-[![Coverage Status](https://img.shields.io/codecov/c/github/pridiltal/oddstream/master.svg)](https://codecov.io/github/pridiltal/oddstream?branch=master)
+
 
 # oddstream {Outlier Detection in Data STREAMs}
 ---------------------------------------------------
