@@ -1,7 +1,7 @@
 #' Extract features from a collection of time series
 #'
 #' @description This function extract time series features from a collection of time series.
-#' This is a modification of  \code{\link[anomalous]{tsmeasures}} function of \code{\link[anomalous]{anomalous}}
+#' This is a modification oftsmeasures function of anomalous package
 #' package .
 #' @param normalise If TRUE, each time series is scaled to be normally distributed with mean 0 and sd 1
 #' @param width A window size for variance change, level shift and lumpiness
@@ -25,7 +25,7 @@
 #'   \item{rmeaniqmean}{Ratio between interquartile mean and the arithmetic mean }
 #'   \item{moment3}{Third moment}
 #'   \item{highlowmu}{Ratio between the means of data that is below and upper the global mean}
-#' @seealso \code{\link[anomalous]{tsmeasures}}, \code{\link{find_odd_streams}}, \code{\link{get_pc_space}},
+#' @seealso \code{\link{find_odd_streams}}, \code{\link{get_pc_space}},
 #' \code{\link{set_outlier_threshold}}, \code{\link{plotpc}}
 #'
 #' @export

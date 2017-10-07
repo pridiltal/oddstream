@@ -38,7 +38,7 @@ An object of class features with the following components:
 }
 \description{
 This function extract time series features from a collection of time series.
-This is a modification of  \code{\link[anomalous]{tsmeasures}} function of \code{\link[anomalous]{anomalous}}
+This is a modification oftsmeasures function of anomalous package
 package .
 }
 \examples{
@@ -53,6 +53,6 @@ In 2015 IEEE International Conference on Data Mining Workshop (ICDMW), (pp. 1616
 {Fulcher, B. D. (2012). Highly comparative time-series analysis. PhD thesis, University of Oxford.}
 }
 \seealso{
-\code{\link[anomalous]{tsmeasures}}, \code{\link{find_odd_streams}}, \code{\link{get_pc_space}},
+\code{\link{find_odd_streams}}, \code{\link{get_pc_space}},
 \code{\link{set_outlier_threshold}}, \code{\link{plotpc}}
 }
