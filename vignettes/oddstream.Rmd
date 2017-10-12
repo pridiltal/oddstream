@@ -30,7 +30,7 @@ This vignette documents how to detect anomalous series within a large collection
 It represents a real data set obtained using a fiber optics cable attached to a system. (Since the real data set contains commercially sensitive information, the actual application is not revealed).
 
 This R chunck will allow the user to get a three dimensional visualization of the data set
-```{r 3dplot2, eval= TRUE, echo=TRUE, warning=FALSE, message=FALSE, out.width='100%', out.height='100%'}
+```{r 3dplot2, eval= FALSE, echo=TRUE, warning=FALSE, message=FALSE, out.width='100%', out.height='100%'}
 library(oddstream)
 time <- nrow(anomalous_stream)
 sensor <- ncol(anomalous_stream)

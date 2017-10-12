@@ -2,7 +2,7 @@ Package: oddstream
 Type: Package
 Title: Outlier Detection in Data Streams
 Version: 0.1.0
-Depends: R (>= 2.10)
+Depends: R (>= 3.4.2)
 Author: Priyanga Dilini Talagala [aut, cre]
     Rob J. Hyndman [aut]
     Kate Smith-Miles [aut]

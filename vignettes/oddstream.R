@@ -10,8 +10,8 @@ knitr::opts_chunk$set(
 #  sensor <- ncol(anomalous_stream)
 #  Time <- 1 : time
 #  Sensor_ID <- 1 : sensor
-#  #library(plotly)
-#  #library(RColorBrewer)
+#  library(plotly)
+#  library(RColorBrewer)
 #  Value <- as.matrix(anomalous_stream)
 #  plot_ly(x = ~ Sensor_ID, y = ~ Time, z = ~ Value, colors = colorRamp(c("palegreen", "red", "red1", "red2", "red3"))) %>% add_surface()
 
