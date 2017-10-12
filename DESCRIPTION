@@ -40,5 +40,5 @@ Encoding: UTF-8
 Suggests: testthat,
     knitr,
     rmarkdown,
-    plotly
+    tidyverse
 

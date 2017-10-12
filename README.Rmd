@@ -45,8 +45,32 @@ devtools::install_github("pridiltal/oddstream")
 
 ## Example
 
+### Dataset
 
-```{r example, cache=TRUE}
+```{r dataset, echo=FALSE, eval=TRUE}
+library(oddstream)
+library(tidyverse)
+t <- nrow(anomalous_stream)
+f <- ncol(anomalous_stream)
+g <- as_tibble(anomalous_stream) %>% gather() %>%
+  mutate(key= rep((1:f), each = t)) %>%
+  mutate(Time = rep(1:t, f))
+colnames(g) <- c("Cable", "Value", "Time")
+#g <- g%>% mutate(Value = log(Value))
+
+p1 <- ggplot(g, aes(x = Time, y = Cable, fill = Value)) + 
+  geom_tile() +
+   scale_fill_gradientn(colours = c("palegreen", "orangered1", "orangered2"), values = c(0,.1,max(anomalous_stream)))+
+  xlab("Time ") + 
+  scale_x_continuous(breaks = seq(0,1400, 200))+
+  scale_y_continuous(breaks = seq(0,600, 100))+
+  ylab("Time Series ID") 
+  #theme(aspect.ratio = 1)
+
+p1
+```
+
+```{r example}
 library(oddstream)
 # Considers the first window  of the data set as the training set and the remaining as the test stream
 train_data <- anomalous_stream[1:100,]
@@ -55,6 +79,10 @@ test_stream <-anomalous_stream[101:1456,]
 find_odd_streams(train_data, test_stream , plot_type = "out_location_plot", trials = 100)
 ```
 
+### Further Details
+```{r help, echo = TRUE, eval= FALSE}
+?oddstream
+```
 
 ## References
 

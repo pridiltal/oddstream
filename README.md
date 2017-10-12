@@ -1,4 +1,7 @@
 
+oddstream <img src="logo.png" align="right" height="150" />
+===========================================================
+
 [![Project Status: WIP ? Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip) [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) [![Build Status](https://travis-ci.org/pridiltal/oddstream.svg?branch=master)](https://travis-ci.org/pridiltal/oddstream)
 
 ------------------------------------------------------------------------
@@ -15,6 +18,8 @@ oddstream
 
 The goal of oddstream (Outlier Detection in Data Streams) is to propose a framework that provides real time support for early detection of anomalous series within a large collection of streaming time series data. By definition, anomalies are rare in comparison to a system's typical behaviour. We define an anomaly as an observation that is very unlikely given the forecast distribution. The algorithm first forecasts a boundary for the system's typical behaviour using a representative sample of the typical behaviour of the system. An approach based on extreme value theory is used for this boundary prediction process. Then a sliding window is used to test for anomalous series within the newly arrived collection of series. Feature based representation of time series is used as the input to the model. To cope with concept drift, the forecast boundary for the system's typical behaviour is updated periodically.
 
+This package is still under development and this repository contains a development version of the R package *oddstream*.
+
 Installation
 ------------
 
@@ -28,11 +33,26 @@ devtools::install_github("pridiltal/oddstream")
 Example
 -------
 
+### Dataset
+
+    #> Loading tidyverse: ggplot2
+    #> Loading tidyverse: tibble
+    #> Loading tidyverse: tidyr
+    #> Loading tidyverse: readr
+    #> Loading tidyverse: purrr
+    #> Loading tidyverse: dplyr
+    #> Conflicts with tidy packages ----------------------------------------------
+    #> filter(): dplyr, stats
+    #> lag():    dplyr, stats
+
+![](README-dataset-1.png)
+
 ``` r
 library(oddstream)
 # Considers the first window  of the data set as the training set and the remaining as the test stream
 train_data <- anomalous_stream[1:100,]
 test_stream <-anomalous_stream[101:1456,]
+
 find_odd_streams(train_data, test_stream , plot_type = "out_location_plot", trials = 100)
 ```
 
@@ -83,3 +103,16 @@ find_odd_streams(train_data, test_stream , plot_type = "out_location_plot", tria
 ![](README-example-12.png)
 
     #> Outliers from:  1201  to:  1300 :  442 444 446 447 448 452 453 454 455 456 457 458 459 460 464 466 467 621
+
+### Further Details
+
+``` r
+?oddstream
+```
+
+References
+----------
+
+-   Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate extreme value statistics. Journal of signal processing systems, 65 (3), (pp. 371-389).
+
+-   Hyndman, R. J., Wang, E., & Laptev, N. (2015). Large-scale unusual time series detection. In 2015 IEEE International Conference on Data Mining Workshop (ICDMW), (pp. 1616-1619). IEEE.
