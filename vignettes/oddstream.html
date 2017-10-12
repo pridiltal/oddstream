@@ -10,51 +10,14 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<meta name="author" content="Priyanga Dilini Talagala" />
 
-<meta name="date" content="2017-10-12" />
+<meta name="date" content="2017-10-13" />
 
-<title>Detecting anomalous series within a collection of sreaming time series</title>
+<title>Detectimg anomalous time series within a large collection of time series</title>
 
 
 
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-</style>
 
 
 
@@ -67,16 +30,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore">Detecting anomalous series within a collection of sreaming time series</h1>
-<h4 class="date"><em>2017-10-12</em></h4>
+<h1 class="title toc-ignore">Detectimg anomalous time series within a large collection of time series</h1>
+<h4 class="author"><em>Priyanga Dilini Talagala</em></h4>
+<h4 class="date"><em>2017-10-13</em></h4>
 
 
-<div id="TOC">
-<ul>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#about-anomalous_stream-data-set">About <code>anomalous_stream</code> data set</a></li>
-</ul>
-</div>
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
@@ -86,16 +44,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="about-anomalous_stream-data-set" class="section level2">
 <h2>About <code>anomalous_stream</code> data set</h2>
 <p><code>anomalous_stream</code>, is an example dataset available in <code>oddstream</code> package. It represents a real data set obtained using a fiber optics cable attached to a system. (Since the real data set contains commercially sensitive information, the actual application is not revealed).</p>
-<p>This R chunck will allow the user to get a three dimensional visualization of the data set</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(oddstream)
-time &lt;-<span class="st"> </span><span class="kw">nrow</span>(anomalous_stream)
-sensor &lt;-<span class="st"> </span><span class="kw">ncol</span>(anomalous_stream)
-Time &lt;-<span class="st"> </span><span class="dv">1</span> :<span class="st"> </span>time
-Sensor_ID &lt;-<span class="st"> </span><span class="dv">1</span> :<span class="st"> </span>sensor
-<span class="kw">library</span>(plotly)
-<span class="kw">library</span>(RColorBrewer)
-Value &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(anomalous_stream)
-<span class="kw">plot_ly</span>(<span class="dt">x =</span> ~<span class="st"> </span>Sensor_ID, <span class="dt">y =</span> ~<span class="st"> </span>Time, <span class="dt">z =</span> ~<span class="st"> </span>Value, <span class="dt">colors =</span> <span class="kw">colorRamp</span>(<span class="kw">c</span>(<span class="st">&quot;palegreen&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;red1&quot;</span>, <span class="st">&quot;red2&quot;</span>, <span class="st">&quot;red3&quot;</span>))) %&gt;%<span class="st"> </span><span class="kw">add_surface</span>() </code></pre></div>
 </div>
 
 

@@ -1,12 +1,10 @@
 ---
-title: "Detecting anomalous series within a collection of sreaming time series"
-#author: "Priyanga Dilini Talagala"
+title: "Detectimg anomalous time series within a large collection of time series"
+author: "Priyanga Dilini Talagala"
 date: "`r Sys.Date()`"
-output: 
-    rmarkdown::html_vignette:
-        toc: true
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Detecting anomalous series within a collection of sreaming time series}
+  %\VignetteIndexEntry{Detectimg anomalous time series within a large collection of time series}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -29,15 +27,3 @@ This vignette documents how to detect anomalous series within a large collection
 `anomalous_stream`, is an example dataset  available in `oddstream` package.
 It represents a real data set obtained using a fiber optics cable attached to a system. (Since the real data set contains commercially sensitive information, the actual application is not revealed).
 
-This R chunck will allow the user to get a three dimensional visualization of the data set
-```{r 3dplot2, eval= FALSE, echo=TRUE, warning=FALSE, message=FALSE, out.width='100%', out.height='100%'}
-library(oddstream)
-time <- nrow(anomalous_stream)
-sensor <- ncol(anomalous_stream)
-Time <- 1 : time
-Sensor_ID <- 1 : sensor
-library(plotly)
-library(RColorBrewer)
-Value <- as.matrix(anomalous_stream)
-plot_ly(x = ~ Sensor_ID, y = ~ Time, z = ~ Value, colors = colorRamp(c("palegreen", "red", "red1", "red2", "red3"))) %>% add_surface() 
-```
