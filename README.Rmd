@@ -1,16 +1,13 @@
 ---
 output: github_document
 ---
-[![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-[![codecov](https://codecov.io/gh/pridiltal/oddstream/branch/master/graph/badge.svg)](https://codecov.io/gh/pridiltal/oddstream)
- 
----
- 
+
+
  
 ---
  
 [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-[![codecov](https://codecov.io/gh/pridiltal/oddstream/branch/master/graph/badge.svg)](https://codecov.io/gh/pridiltal/oddstream)
+
  
 ---
  
