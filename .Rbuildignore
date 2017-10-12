@@ -3,5 +3,4 @@
 ^log\.png$
 ^logo\.png$
 ^\.travis\.yml$
-^README\.Rmd$
-^README-.*\.png$
+
