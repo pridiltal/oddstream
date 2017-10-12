@@ -28,7 +28,8 @@ knitr::opts_chunk$set(
 
 # oddstream
 
-The goal of oddstream is to ...
+The goal of oddstream (Outlier Detection in Data Streams) is to propose a framework that provides real time support for early detection of anomalous series within a large collection of streaming time series data. By definition, anomalies are rare in comparison to a system's typical behaviour. We define an anomaly as an observation that  is very unlikely given the forecast distribution. The algorithm first forecasts a boundary for the system's typical behaviour using a representative sample of the typical behaviour of the system. An  approach based on extreme value theory is used for this boundary prediction process. Then a sliding window is used to test for anomalous series within the newly arrived collection of series. Feature based representation of time series is used as the input to the model. To cope with concept drift, the forecast boundary for the system's typical behaviour is updated periodically.
+
 
 ## Installation
 
@@ -41,8 +42,12 @@ devtools::install_github("pridiltal/oddstream")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-## basic example code
+library(oddstream)
+# Considers the first window  of the data set as the training set and the remaining as the test stream
+train_data <- anomalous_stream[1:100,]
+test_stream <-anomalous_stream[101:1456,]
+find_odd_streams(train_data, test_stream , plot_type = "out_location_plot", trials = 100)
+
 ```
