@@ -34,6 +34,11 @@ Imports: pcaPP,
     tibble,
     reshape,
     dplyr,
-    graphics
+    graphics,
+    tidyr
 Encoding: UTF-8   
-Suggests: testthat
+Suggests: testthat,
+    knitr,
+    rmarkdown,
+    plotly
+VignetteBuilder: knitr

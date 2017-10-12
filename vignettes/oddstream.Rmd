@@ -1,0 +1,43 @@
+---
+title: "Detecting anomalous series within a collection of sreaming time series"
+#author: "Priyanga Dilini Talagala"
+date: "`r Sys.Date()`"
+output: 
+    rmarkdown::html_vignette:
+        toc: true
+vignette: >
+  %\VignetteIndexEntry{Detecting anomalous series within a collection of sreaming time series}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+## Introduction
+
+This package, `oddstream` (Outlier Detection in Data Streams) proposes a framework that provides real time support for early detection of anomalous series within a large collection of streaming time series data. By definition, anomalies are rare in comparison to a system's typical behaviour. We define an anomaly as an observation that  is very unlikely given the forecast distribution. The algorithm first forecasts a boundary for the system's typical behaviour using a representative sample of the typical behaviour of the system. An  approach based on extreme value theory is used for this boundary prediction process. Then a sliding window is used to test for anomalous series within the newly arrived collection of series. Feature based representation of time series is used as the input to the model. To cope with concept drift, the forecast boundary for the system's typical behaviour is updated periodically.
+
+This vignette documents how to detect anomalous series within a large collection of streaming time series data using `anomalous_stream`, an example dataset  available in `oddstream` package.
+
+
+## About `anomalous_stream` data set
+
+`anomalous_stream`, is an example dataset  available in `oddstream` package.
+It represents a real data set obtained using a fiber optics cable attached to a system. (Since the real data set contains commercially sensitive information, the actual application is not revealed).
+
+This R chunck will allow the user to get a three dimensional visualization of the data set
+```{r 3dplot2, eval= TRUE, echo=TRUE, warning=FALSE, message=FALSE, out.width='100%', out.height='100%'}
+library(oddstream)
+time <- nrow(anomalous_stream)
+sensor <- ncol(anomalous_stream)
+Time <- 1 : time
+Sensor_ID <- 1 : sensor
+library(plotly)
+library(RColorBrewer)
+Value <- as.matrix(anomalous_stream)
+plot_ly(x = ~ Sensor_ID, y = ~ Time, z = ~ Value, colors = colorRamp(c("palegreen", "red", "red1", "red2", "red3"))) %>% add_surface() 
+```

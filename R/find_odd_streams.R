@@ -30,6 +30,7 @@
 #' @importFrom tibble as_tibble
 #' @importFrom reshape melt
 #' @importFrom dplyr mutate
+#' @importFrom tidyr gather
 #' @import graphics
 #' @import stats
 #' @import ggplot2
@@ -152,9 +153,29 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
     }
 
     if (plot_type == "mvtsplot") {
-      par(pty = "m")
-      colnames(window_data) <- 1:ncol(window_data)
-      mvtsplot::mvtsplot(window_data, levels=8, gcol=2, norm="global")
+      #par(pty = "m")
+      #colnames(window_data) <- 1:ncol(window_data)
+      #mvtsplot::mvtsplot(window_data, levels=8, gcol=2, norm="global")
+
+      t <- nrow(window_data)
+      f <- ncol(window_data)
+      window_data <- tibble::as_tibble(window_data)
+      g <- tidyr::gather(window_data)
+      g <- dplyr::mutate(g, key= rep((1:f), each = t), Time = rep(1:t, f))
+      colnames(g) <- c("TimeSeiresID", "Value", "Time")
+
+      mvtsplot <- ggplot(g, aes_string(x = "TimeSeiresID",
+                                       y = "Time", fill = "Value")) +
+        geom_tile() +
+        scale_fill_gradientn(colours = c("palegreen", "orangered1",
+                                         "orangered2"),
+                             values = c(0,.1,max(window_data)))+
+        xlab("Time Series ID)") +
+        ylab("Time") +
+        theme(aspect.ratio = 1)
+
+      print(mvtsplot)
+
     }
 
 
