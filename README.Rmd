@@ -47,7 +47,7 @@ devtools::install_github("pridiltal/oddstream")
 
 ### Dataset
 
-```{r dataset, echo=FALSE, eval=TRUE}
+```{r dataset, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
 library(oddstream)
 library(tidyverse)
 t <- nrow(anomalous_stream)
