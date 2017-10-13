@@ -167,7 +167,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
       mvtsplot <- ggplot(g, aes_string(x = "TimeSeiresID",
                                        y = "Time", fill = "Value")) +
         geom_tile() +
-        scale_fill_gradientn(colours = c("palegreen", "orangered1",
+        scale_fill_gradientn(colours = c("lightblue", "orangered1",
                                          "orangered2"),
                              values = c(0,.1,max(window_data)))+
         xlab("Time Series ID)") +
