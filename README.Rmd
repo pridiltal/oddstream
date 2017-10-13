@@ -60,7 +60,7 @@ colnames(g) <- c("Cable", "Value", "Time")
 
 p1 <- ggplot(g, aes(x = Time, y = Cable, fill = Value)) + 
   geom_tile() +
-   scale_fill_gradientn(colours = c("lightblue", "orangered1", "orangered2"), values = c(0,.1,max(anomalous_stream)))+
+   scale_fill_gradientn(colours = c("lightblue", "red1", "red2"), values = c(0,.1,max(anomalous_stream)))+
   xlab("Time ") + 
   scale_x_continuous(breaks = seq(0,1400, 200))+
   scale_y_continuous(breaks = seq(0,600, 100))+

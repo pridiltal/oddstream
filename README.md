@@ -33,7 +33,7 @@ devtools::install_github("pridiltal/oddstream")
 Example
 -------
 
-### Dataset
+### Multivariate time series plot of `anomalous_stream` dataset available in `oddstream` package
 
 ![](README-dataset-1.png)
 
