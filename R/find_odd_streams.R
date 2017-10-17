@@ -71,7 +71,9 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
   end <- seq(window_length, nrow(test_stream), window_skip)
 
   X2 = Series = NULL
+  out_marix <- NULL
   i <- 2
+  series <- 1:ncol(test_stream)
   while (i <= length(end)) {
     window_data <- test_stream[start[i]:end[i], ]
 
@@ -85,6 +87,10 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
     pctest <- tibble::as_tibble(pctest)
     outlier_names <- paste("series", outliers, sep= " ")
 
+    out_marix <- rbind(out_marix, t(ifelse(series %in% outliers, 1, 0)))
+
+    if (plot_type %in% c("mvtsplot", "line", "pcplot", "out_location_plot") )
+    {
     if (plot_type == "line") {
 
       if(!(is.matrix(window_data)))
@@ -178,7 +184,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
 
     }
 
-
+    }
 
     if (length(outliers) > 0) {
       cat("Outliers from: ", start[i], " to: ", end[i], ": ", outliers, "\n")
@@ -201,4 +207,5 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
 
   }
   # dev.off()
+  return(out_marix)
 }
