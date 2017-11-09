@@ -31,6 +31,7 @@
 #' @importFrom reshape melt
 #' @importFrom dplyr mutate
 #' @importFrom tidyr gather
+#' @importFrom kernlab kmmd
 #' @import graphics
 #' @import stats
 #' @import ggplot2
@@ -194,12 +195,17 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
 
     if (concept_drift == TRUE)
     {
-      if (length(outliers) > 0) {
-        t <- set_outlier_threshold(pctest[-outliers,], trials = trials )
-        pc$pcnorm <- pctest[-outliers,]
-      } else {
-        t <- set_outlier_threshold(pctest, trials = trials )
-        pc$pcnorm <- pctest
+      mmdo <- kernlab::kmmd(pc$pcnorm, pctest[-outliers,])
+
+      if(mmdo@H0)
+      {
+        if (length(outliers) > 0) {
+          t <- set_outlier_threshold(pctest[-outliers,], trials = trials )
+          pc$pcnorm <- pctest[-outliers,]
+        } else {
+          t <- set_outlier_threshold(pctest, trials = trials )
+          pc$pcnorm <- pctest
+        }
       }
     }
 

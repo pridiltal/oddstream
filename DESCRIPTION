@@ -35,7 +35,8 @@ Imports: pcaPP,
     reshape,
     dplyr,
     graphics,
-    tidyr
+    tidyr,
+    kernlab
 Encoding: UTF-8   
 Suggests: testthat,
     knitr,
