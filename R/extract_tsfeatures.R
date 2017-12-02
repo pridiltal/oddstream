@@ -10,9 +10,9 @@
 #' @return An object of class features with the following components:
 #'   \item{mean}{Mean}
 #'   \item{var}{Variance}
-#'   \item{lumpinessy}{Variance of annual variances of remainder}
-#'   \item{lshifty}{Level shift using rolling window}
-#'   \item{vchangey}{Variance change}
+#'   \item{lumpiness}{Variance of annual variances of remainder}
+#'   \item{lshift}{Level shift using rolling window}
+#'   \item{vchange}{Variance change}
 #'   \item{linearity}{Strength of linearity}
 #'   \item{curvature}{Strength of curvature}
 #'   \item{spikiness}{Strength of spikiness}
@@ -72,14 +72,14 @@ extract_tsfeatures <- function(y, normalise = TRUE, width = ifelse(frequency(y) 
     measures$var <- apply(y, 2, var, na.rm = TRUE)
 
     # measure5 - Lumpiness
-    measures$lumpinessy <- apply(y, 2, Lump, width = width)
+    measures$lumpiness <- apply(y, 2, Lump, width = width)
 
     # measure6 - Level shift using rolling window
-    measures$lshifty <- apply(y, 2, RLshift, width = width)
+    measures$lshift <- apply(y, 2, RLshift, width = width)
 
 
     # measure7 - variance change using rolling window
-    measures$vchangey <- apply(y, 2, RVarChange, width = width)
+    measures$vchange <- apply(y, 2, RVarChange, width = width)
 
     # measure11,12,13,14,15,16,17 - Strength of trend and seasonality and spike
     varts <- apply(y, 2, VarTS, tspx = tspy)

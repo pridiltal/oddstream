@@ -20,9 +20,9 @@ extract_tsfeatures(y, normalise = TRUE, width = ifelse(frequency(y) > 1,
 An object of class features with the following components:
   \item{mean}{Mean}
   \item{var}{Variance}
-  \item{lumpinessy}{Variance of annual variances of remainder}
-  \item{lshifty}{Level shift using rolling window}
-  \item{vchangey}{Variance change}
+  \item{lumpiness}{Variance of annual variances of remainder}
+  \item{lshift}{Level shift using rolling window}
+  \item{vchange}{Variance change}
   \item{linearity}{Strength of linearity}
   \item{curvature}{Strength of curvature}
   \item{spikiness}{Strength of spikiness}
