@@ -38,7 +38,10 @@ to FALSE}
 \item{pc_boundary}{Expand the pc plot limits by this amount. Default value is set to 50}
 }
 \value{
-The indices of the outlying series in each window. For each window a plot is also produced on the current
+a list with components
+\item{out_marix}{The indices of the outlying series in each window}
+\item{concept}{p-value for the two sample comparison test for concept drift detection}
+For each window a plot is also produced on the current
 graphic device
 }
 \description{
@@ -71,6 +74,9 @@ find_odd_streams(train_data, test_stream , plot_type = "out_location_plot", tria
 \references{
 Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate
 extreme value statistics. Journal of signal processing systems, 65 (3),371-389.
+
+Duong, T., Goud, B. & Schauer, K. (2012) Closed-form density-based framework for automatic detection
+of cellular morphology changes. PNAS, 109, 8382-8387.
 }
 \seealso{
 \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}}, \code{\link{set_outlier_threshold}},

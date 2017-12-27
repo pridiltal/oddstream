@@ -19,7 +19,10 @@
 #' to FALSE
 #' @param trials Input for \code{set_outlier_threshold} function. Default value is set to 500.
 #' @param pc_boundary Expand the pc plot limits by this amount. Default value is set to 50
-#' @return The indices of the outlying series in each window. For each window a plot is also produced on the current
+#' @return a list with components
+#' \item{out_marix}{The indices of the outlying series in each window}
+#' \item{concept}{p-value for the two sample comparison test for concept drift detection}
+#' For each window a plot is also produced on the current
 #' graphic device
 #' @seealso  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}}, \code{\link{set_outlier_threshold}},
 #' \code{\link{plotpc}}
@@ -59,11 +62,14 @@
 #' @references Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate
 #' extreme value statistics. Journal of signal processing systems, 65 (3),371-389.
 #'
+#' Duong, T., Goud, B. & Schauer, K. (2012) Closed-form density-based framework for automatic detection
+#' of cellular morphology changes. PNAS, 109, 8382-8387.
 #'
 find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, update_threshold_freq,
                              plot_type = c("mvtsplot", "line", "pcplot", "out_location_plot"), window_length = nrow(train_data),
                              window_skip = window_length, concept_drift = FALSE, trials = 500, pc_boundary = 50) {
 
+  concept <- NULL
   train_features <- extract_tsfeatures(train_data)
   train_features <- scale(train_features, center = TRUE, scale = TRUE)
   pc <- get_pc_space(train_features)
@@ -86,6 +92,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
     outliers <- which(fhat_test$estimate < t$threshold_fnx)
     colnames(pctest) <- c("PC1", "PC2")
     pctest <- tibble::as_tibble(pctest)
+    out_p <- length(outliers) / length(series)
     outlier_names <- paste("series", outliers, sep= " ")
 
     out_marix <- rbind(out_marix, t(ifelse(series %in% outliers, 1, 0)))
@@ -195,15 +202,30 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
 
     if (concept_drift == TRUE)
     {
-      mmdo <- kernlab::kmmd(pc$pcnorm, pctest[-outliers,])
+      if (length(outliers) > 0) {
+        if(out_p <0.5)
+        {
+          ktest<-ks::kde.test(x1 = pc$pcnorm, x2 = pctest[-outliers,] )
+        }
+        else { ktest<-ks::kde.test(x1 = pc$pcnorm, x2 = pctest )} ## change this line, now consider everything
+     } else{ ktest<-ks::kde.test(x1 = pc$pcnorm, x2 = pctest ) }
 
-      if(mmdo@H0)
+      concept <- c(concept , ktest$pvalue )
+
+      if(   ktest$pvalue  < 0.05)
       {
         if (length(outliers) > 0) {
-          t <- set_outlier_threshold(pctest[-outliers,], trials = trials )
-          pc$pcnorm <- pctest[-outliers,]
+          if(out_p <0.5)
+          {
+            t <- set_outlier_threshold(pctest[-outliers,], trials = trials ,  p_rate = 0.001)
+            pc$pcnorm <- pctest[-outliers,]
+          } else {
+            ##changed this line, now consider everything
+            t <- set_outlier_threshold(pctest, trials = trials ,  p_rate = 0.001)
+            pc$pcnorm <- pctest
+          }
         } else {
-          t <- set_outlier_threshold(pctest, trials = trials )
+          t <- set_outlier_threshold(pctest, trials = trials,  p_rate = 0.001 )
           pc$pcnorm <- pctest
         }
       }
@@ -213,5 +235,5 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
 
   }
   # dev.off()
-  return(out_marix)
+  return(list(out_marix, concept))
 }
