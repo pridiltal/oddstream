@@ -1,45 +1,11 @@
 Package: oddstream
 Type: Package
-Title: Outlier Detection in Data Streams
+Title: What the Package Does (Title Case)
 Version: 0.1.0
-Depends: R (>= 3.4.1)
-Author: Priyanga Dilini Talagala [aut, cre]
-    Rob J. Hyndman [aut]
-    Kate Smith-Miles [aut]
-    Sevvandi Kandanaarachchi [aut]
-    Mario A. Munoz [aut]
-Maintainer: Priyanga Dilini Talagala <dilini.talagala@monash.edu>
-Description: This package proposes a framework that provides real time support for early detection of
-    anomalous series within a large collection of streaming time series data. By definition, anomalies
-    are rare in comparison to a system's typical behaviour. We define an anomaly as an observation that
-    is very unlikely given the forecast distribution. The algorithm first forecasts a boundary for the
-    system's typical behaviour using a representative sample of the typical behaviour of the system. An
-    approach based on extreme value theory is used for this boundary prediction process. Then a sliding
-    window is used to test for anomalous series within the newly arrived collection of series. Feature
-    based representation of time series is used as the input to the model. To cope with concept drift,
-    the forecast boundary for the system's typical behaviour is updated periodically.
-License: GPL-2
+Author: Who wrote it
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
-Imports: pcaPP,
-    stats,
-    ggplot2,
-    ks,
-    MASS,
-    RcppRoll,
-    mgcv,
-    moments ,
-    RColorBrewer,
-    mvtsplot,
-    tibble,
-    reshape,
-    dplyr,
-    graphics,
-    tidyr,
-    kernlab
-Encoding: UTF-8   
-Suggests: testthat,
-    knitr,
-    rmarkdown,
-    tidyverse
-
