@@ -9,7 +9,7 @@
 #' @param y A multivariate time serie
 #' @return An object of class features with the following components:
 #'   \item{mean}{Mean}
-#'   \item{var}{Variance}
+#'   \item{variance}{Variance}
 #'   \item{lumpiness}{Variance of annual variances of remainder}
 #'   \item{lshift}{Level shift using rolling window}
 #'   \item{vchange}{Variance change}
@@ -20,8 +20,8 @@
 #'   \item{peak}{Strength of peaks}
 #'   \item{trough}{Strength of trough}
 #'   \item{BurstinessFF}{Burstiness of time series using Fano Factor}
-#'   \item{min}{Minimum value}
-#'   \item{max}{Maximum value}
+#'   \item{minimum}{Minimum value}
+#'   \item{maximum}{Maximum value}
 #'   \item{rmeaniqmean}{Ratio between interquartile mean and the arithmetic mean }
 #'   \item{moment3}{Third moment}
 #'   \item{highlowmu}{Ratio between the means of data that is below and upper the global mean}
@@ -69,7 +69,7 @@ extract_tsfeatures <- function(y, normalise = TRUE, width = ifelse(frequency(y) 
     measures$mean <- colMeans(y, na.rm = TRUE)
 
     # measure2 - Calculate variance of ts
-    measures$var <- apply(y, 2, var, na.rm = TRUE)
+    measures$variance <- apply(y, 2, var, na.rm = TRUE)
 
     # measure5 - Lumpiness
     measures$lumpiness <- apply(y, 2, Lump, width = width)
@@ -98,8 +98,8 @@ extract_tsfeatures <- function(y, normalise = TRUE, width = ifelse(frequency(y) 
 
     # measure21,22 - Calculate the time series length)
     minmax <- apply(y, 2, function(x) tsminmax(x))  #original data set
-    measures$min <- sapply(minmax, function(x) x$mn)
-    measures$max <- sapply(minmax, function(x) x$mx)
+    measures$minimum <- sapply(minmax, function(x) x$mn)
+    measures$maximum <- sapply(minmax, function(x) x$mx)
 
     # measure28 - the ratio between interquartile mean and the arithmetic mean
     measures$rmeaniqmean <- apply(y, 2, rmeaniqmean)  #apply to original data

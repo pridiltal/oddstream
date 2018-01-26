@@ -19,7 +19,7 @@ extract_tsfeatures(y, normalise = TRUE, width = ifelse(frequency(y) > 1,
 \value{
 An object of class features with the following components:
   \item{mean}{Mean}
-  \item{var}{Variance}
+  \item{variance}{Variance}
   \item{lumpiness}{Variance of annual variances of remainder}
   \item{lshift}{Level shift using rolling window}
   \item{vchange}{Variance change}
@@ -30,8 +30,8 @@ An object of class features with the following components:
   \item{peak}{Strength of peaks}
   \item{trough}{Strength of trough}
   \item{BurstinessFF}{Burstiness of time series using Fano Factor}
-  \item{min}{Minimum value}
-  \item{max}{Maximum value}
+  \item{minimum}{Minimum value}
+  \item{maximum}{Maximum value}
   \item{rmeaniqmean}{Ratio between interquartile mean and the arithmetic mean }
   \item{moment3}{Third moment}
   \item{highlowmu}{Ratio between the means of data that is below and upper the global mean}
