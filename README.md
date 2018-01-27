@@ -10,7 +10,7 @@ oddstream <img src="logo.png" align="right" height="150" />
 
 ------------------------------------------------------------------------
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--01--05-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--01--27-yellowgreen.svg)](/commits/master)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 oddstream
@@ -76,7 +76,7 @@ output <- find_odd_streams(train_data, test_stream , plot_type = "out_location_p
 
 ![](README-example-8.png)
 
-    #> Outliers from:  801  to:  900 :  398 399 439 440 441 445 446 447 448 449 450 451 452 453 454 455 456 457 458 459 473 477 480 482 483 484 488 489 490 492 493 494 495 496 497 499 503 504 505 506 507 508 509 510 511 512 513 514 515 516
+    #> Outliers from:  801  to:  900 :  398 399 439 440 441 445 446 447 448 449 450 451 452 453 454 455 456 457 458 459 473 477 480 482 483 484 488 489 490 492 493 494 495 497 499 503 504 505 506 507 508 509 510 511 512 513 514 515 516
 
 ![](README-example-9.png)
 
@@ -92,7 +92,7 @@ output <- find_odd_streams(train_data, test_stream , plot_type = "out_location_p
 
 ![](README-example-12.png)
 
-    #> Outliers from:  1201  to:  1300 :  442 444 446 447 448 452 453 454 455 456 457 458 459 460 464 466 467 621
+    #> Outliers from:  1201  to:  1300 :  442 446 447 448 452 453 454 455 456 457 458 459 460 464 466 467 621
 
 ### Further Details
 
