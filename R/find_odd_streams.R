@@ -160,7 +160,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
         geom_point()+
         theme(aspect.ratio = 2) +
         scale_colour_manual(name="Type", values = c("outlier"="red",
-                                                    "normal"="lightblue"))+
+                                                    "normal"="black"))+
         ggtitle(paste("Data from: ", start[i], " to: ", end[i]))
 
       print(out_plot)
