@@ -1,0 +1,71 @@
+---
+title: "Outlier Detection in Non-Stationary Data Streams"
+author: "Priyanga Dilini Talagala"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+
+`oddstream` (Outlier Detection in Data STRAMs) is an R package to detect outlying series within a large collection of time series in the context of non-stationary streaming data. We define an outlier as an observation that is very unlikely given the recent distribution of a given system. In this work we make two fundamental contributions. First, we propose a framework that provides early detection of anomalous behaviour within a large collection of streaming time series data using extreme value theory. Second, we propose
+a novel approach for early detection of non-stationarity (also called \concept drift"
+in the machine learning literature.) The proposed algorithm uses time series fea-
+tures as inputs, and a density-based comparison to detect any significant change in
+the distribution of the features. 
+
+This vignette documents how to detect anomalous event within a large collection of streaming signals.
+
+
+## Vignette Info
+
+Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+
+## Styles
+
+The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+
+    output: 
+      rmarkdown::html_vignette:
+        css: mystyles.css
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))

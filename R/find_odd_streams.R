@@ -142,7 +142,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
         geom_point(data = pc_test, alpha = 0.5,
                    aes_string(x="PC1", y= "PC2", colour = "type")) +
         scale_colour_manual(name="Type",
-                            values = c("outlier"="red", "normal"="lightblue")) +
+                            values = c("outlier"="red", "normal"="black")) +
         ggtitle(paste("Data from: ", start[i], " to: ", end[i])) +
         geom_text( data = labeled.dat,aes_string(x="PC1", y= "PC2", label = "Series"), hjust = 2)
       print(p2)

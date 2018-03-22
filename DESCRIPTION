@@ -7,7 +7,7 @@ Author: Priyanga Dilini Talagala [aut, cre]
     Rob J. Hyndman [aut, ths]
     Kate Smith-Miles [aut, ths]
 Maintainer: Priyanga Dilini Talagala <dilini.talagala@monash.edu>
-Description: This package proposes a framework that provides real time support for early detection of
+Description: We proposes a framework that provides real time support for early detection of
     anomalous series within a large collection of streaming time series data. By definition, anomalies
     are rare in comparison to a system's typical behaviour. We define an anomaly as an observation that
     is very unlikely given the forecast distribution. The algorithm first forecasts a boundary for the
@@ -40,3 +40,4 @@ Suggests: testthat,
     knitr,
     rmarkdown,
     tidyverse
+VignetteBuilder: knitr
