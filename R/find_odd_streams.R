@@ -20,6 +20,7 @@
 #' @param trials Input for \code{set_outlier_threshold} function. Default value is set to 500.
 #' @param pc_boundary Expand the pc plot limits by this amount. Default value is set to 50
 #' @param p_rate False positive rate. Default value is set to 0.001
+#' @param cd_alpha  Singnificance level for the test of non-stationarity
 #' @return a list with components
 #' \item{out_marix}{The indices of the outlying series in each window}
 #' \item{concept}{p-value for the two sample comparison test for concept drift detection}
@@ -68,7 +69,9 @@
 #'
 find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, update_threshold_freq,
                              plot_type = c("mvtsplot", "line", "pcplot", "out_location_plot"), window_length = nrow(train_data),
-                             window_skip = window_length, concept_drift = FALSE, trials = 500, pc_boundary = 50, p_rate = 0.001) {
+                             window_skip = window_length, concept_drift = FALSE, trials = 500,
+                             pc_boundary = 50, p_rate = 0.001, cd_alpha=0.05)
+{
 
   concept <- NULL
   train_features <- extract_tsfeatures(train_data)
@@ -204,7 +207,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
     if (concept_drift == TRUE)
     {
       if (length(outliers) > 0) {
-        if(out_p <0.5)
+        if(out_p < 0.5)
         {
           ktest<-ks::kde.test(x1 = pc$pcnorm, x2 = pctest[-outliers,] )
         }
@@ -213,7 +216,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
 
       concept <- c(concept , ktest$pvalue )
 
-      if(   ktest$pvalue  < 0.05)
+      if(   ktest$pvalue  < cd_alpha)
       {
         if (length(outliers) > 0) {
           if(out_p <0.5)
