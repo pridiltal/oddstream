@@ -24,6 +24,7 @@
 #' @return a list with components
 #' \item{out_marix}{The indices of the outlying series in each window}
 #' \item{concept}{p-value for the two sample comparison test for concept drift detection}
+#' \item{anom_threshold}{anomalous threshold}
 #' For each window a plot is also produced on the current
 #' graphic device
 #' @seealso  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}}, \code{\link{set_outlier_threshold}},
@@ -74,10 +75,12 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
 {
 
   concept <- NULL
+  anom_threshold <- NULL
   train_features <- extract_tsfeatures(train_data)
   train_features <- scale(train_features, center = TRUE, scale = TRUE)
   pc <- get_pc_space(train_features)
   t <- set_outlier_threshold(pc$pcnorm, trials = trials , p_rate = p_rate)
+  anom_threshold <-t
   start <- seq(1, nrow(test_stream), window_skip)
   end <- seq(window_length, nrow(test_stream), window_skip)
 
@@ -233,11 +236,11 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
           pc$pcnorm <- pctest
         }
       }
-      t <- c(t, t)
+      anom_threshold <- c(anom_threshold, t)
     }
     i <- i + 1
 
   }
   # dev.off()
-  return(list(out_marix, concept, t))
+  return(list(out_marix, concept, anom_threshold))
 }

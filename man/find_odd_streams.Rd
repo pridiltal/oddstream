@@ -45,6 +45,7 @@ to FALSE}
 a list with components
 \item{out_marix}{The indices of the outlying series in each window}
 \item{concept}{p-value for the two sample comparison test for concept drift detection}
+\item{anom_threshold}{anomalous threshold}
 For each window a plot is also produced on the current
 graphic device
 }
