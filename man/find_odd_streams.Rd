@@ -8,7 +8,7 @@ find_odd_streams(train_data, test_stream, update_threshold = TRUE,
   update_threshold_freq, plot_type = c("mvtsplot", "line", "pcplot",
   "out_location_plot"), window_length = nrow(train_data),
   window_skip = window_length, concept_drift = FALSE, trials = 500,
-  pc_boundary = 50)
+  pc_boundary = 50, p_rate = 0.001)
 }
 \arguments{
 \item{train_data}{A multivariate time series data set that represents the typical behaviour of the system.}
@@ -36,6 +36,8 @@ to FALSE}
 \item{trials}{Input for \code{set_outlier_threshold} function. Default value is set to 500.}
 
 \item{pc_boundary}{Expand the pc plot limits by this amount. Default value is set to 50}
+
+\item{p_rate}{False positive rate. Default value is set to 0.001}
 }
 \value{
 a list with components

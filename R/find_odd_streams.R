@@ -19,6 +19,7 @@
 #' to FALSE
 #' @param trials Input for \code{set_outlier_threshold} function. Default value is set to 500.
 #' @param pc_boundary Expand the pc plot limits by this amount. Default value is set to 50
+#' @param p_rate False positive rate. Default value is set to 0.001
 #' @return a list with components
 #' \item{out_marix}{The indices of the outlying series in each window}
 #' \item{concept}{p-value for the two sample comparison test for concept drift detection}
@@ -67,13 +68,13 @@
 #'
 find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, update_threshold_freq,
                              plot_type = c("mvtsplot", "line", "pcplot", "out_location_plot"), window_length = nrow(train_data),
-                             window_skip = window_length, concept_drift = FALSE, trials = 500, pc_boundary = 50) {
+                             window_skip = window_length, concept_drift = FALSE, trials = 500, pc_boundary = 50, p_rate = 0.001) {
 
   concept <- NULL
   train_features <- extract_tsfeatures(train_data)
   train_features <- scale(train_features, center = TRUE, scale = TRUE)
   pc <- get_pc_space(train_features)
-  t <- set_outlier_threshold(pc$pcnorm, trials = trials )
+  t <- set_outlier_threshold(pc$pcnorm, trials = trials , p_rate = p_rate)
   start <- seq(1, nrow(test_stream), window_skip)
   end <- seq(window_length, nrow(test_stream), window_skip)
 
@@ -217,15 +218,15 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
         if (length(outliers) > 0) {
           if(out_p <0.5)
           {
-            t <- set_outlier_threshold(pctest[-outliers,], trials = trials ,  p_rate = 0.001)
+            t <- set_outlier_threshold(pctest[-outliers,], trials = trials ,  p_rate =p_rate)
             pc$pcnorm <- pctest[-outliers,]
           } else {
             ##changed this line, now consider everything
-            t <- set_outlier_threshold(pctest, trials = trials ,  p_rate = 0.001)
+            t <- set_outlier_threshold(pctest, trials = trials ,  p_rate = p_rate)
             pc$pcnorm <- pctest
           }
         } else {
-          t <- set_outlier_threshold(pctest, trials = trials,  p_rate = 0.001 )
+          t <- set_outlier_threshold(pctest, trials = trials,  p_rate = p_rate )
           pc$pcnorm <- pctest
         }
       }

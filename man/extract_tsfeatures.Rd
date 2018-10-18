@@ -4,8 +4,8 @@
 \alias{extract_tsfeatures}
 \title{Extract features from a collection of time series}
 \usage{
-extract_tsfeatures(y, normalise = TRUE, width = ifelse(frequency(y) > 1,
-  frequency(y), 10), window = width)
+extract_tsfeatures(y, normalise = TRUE, width = ifelse(frequency(y) >
+  1, frequency(y), 10), window = width)
 }
 \arguments{
 \item{y}{A multivariate time serie}

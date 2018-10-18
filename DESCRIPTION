@@ -18,7 +18,7 @@ Description: We proposes a framework that provides real time support for early d
     the forecast boundary for the system's typical behaviour is updated periodically.
 License: GPL-3
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Imports: pcaPP,
     stats,
     ggplot2,
