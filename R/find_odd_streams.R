@@ -230,11 +230,11 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
           pc$pcnorm <- pctest
         }
       }
+      t <- c(t, t)
     }
-
     i <- i + 1
 
   }
   # dev.off()
-  return(list(out_marix, concept))
+  return(list(out_marix, concept, t))
 }
