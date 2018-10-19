@@ -80,7 +80,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
   train_features <- scale(train_features, center = TRUE, scale = TRUE)
   pc <- get_pc_space(train_features)
   t <- set_outlier_threshold(pc$pcnorm, trials = trials , p_rate = p_rate)
-  anom_threshold <-t
+  anom_threshold <-t$threshold_fnx
   start <- seq(1, nrow(test_stream), window_skip)
   end <- seq(window_length, nrow(test_stream), window_skip)
 
@@ -236,7 +236,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
           pc$pcnorm <- pctest
         }
       }
-      anom_threshold <- c(anom_threshold, t)
+      anom_threshold <- c(anom_threshold, t$threshold_fnx)
     }
     i <- i + 1
 
