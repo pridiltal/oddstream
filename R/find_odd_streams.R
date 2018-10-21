@@ -214,7 +214,7 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
         {
           ktest<-ks::kde.test(x1 = pc$pcnorm, x2 = pctest[-outliers,] )
         }
-        else { ktest<-ks::kde.test(x1 = pc$pcnorm, x2 = pctest )} ## change this line, now consider everything
+        else { ktest<-ks::kde.test(x1 = pc$pcnorm, x2 = pctest[outliers,] )} ## change this line, now consider everything
      } else{ ktest<-ks::kde.test(x1 = pc$pcnorm, x2 = pctest ) }
 
       concept <- c(concept , ktest$pvalue )
@@ -228,8 +228,8 @@ find_odd_streams <- function(train_data, test_stream, update_threshold = TRUE, u
             pc$pcnorm <- pctest[-outliers,]
           } else {
             ##changed this line, now consider everything
-            t <- set_outlier_threshold(pctest, trials = trials ,  p_rate = p_rate)
-            pc$pcnorm <- pctest
+            t <- set_outlier_threshold(pctest[outliers,], trials = trials ,  p_rate = p_rate)
+            pc$pcnorm <- pctest[outliers,]
           }
         } else {
           t <- set_outlier_threshold(pctest, trials = trials,  p_rate = p_rate )
