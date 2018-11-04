@@ -39,5 +39,5 @@ Journal of signal processing systems, 65 (3),371-389.
 }
 \seealso{
 \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
-\code{\link{plotpc}}
+\code{\link{gg_featurespace}}
 }

@@ -32,7 +32,7 @@ Anomaly Detection in Streaming Time Series Data.
 }
 \seealso{
 The core functions in this package: \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
-\code{\link{set_outlier_threshold}}, \code{\link{plotpc}}
+\code{\link{set_outlier_threshold}}, \code{\link{gg_featurespace}}
 }
 \author{
 Priyanga Dilini Talagala, Rob J. Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Muñoz

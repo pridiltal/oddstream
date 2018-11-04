@@ -68,7 +68,7 @@ test_stream[2550:3550, 20:25] =  test_stream[2550:3550, 20:25] * 2
 find_odd_streams(train_data, test_stream , plot_type = 'line', trials = 100)
 
 # To get the PCplot
-#find_odd_streams(train_data, test_stream , plot_type = 'pcplot')
+#find_odd_streams(train_data, test_stream , plot_type = 'none')
 
 # Considers the first window  of the data set as the training set and the remaining as
 # the test stream
@@ -85,5 +85,5 @@ of cellular morphology changes. PNAS, 109, 8382-8387.
 }
 \seealso{
 \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}}, \code{\link{set_outlier_threshold}},
-\code{\link{plotpc}}
+\code{\link{gg_featurespace}}
 }

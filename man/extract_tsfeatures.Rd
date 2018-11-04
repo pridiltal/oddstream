@@ -54,5 +54,5 @@ In 2015 IEEE International Conference on Data Mining Workshop (ICDMW), (pp. 1616
 }
 \seealso{
 \code{\link{find_odd_streams}}, \code{\link{get_pc_space}},
-\code{\link{set_outlier_threshold}}, \code{\link{plotpc}}
+\code{\link{set_outlier_threshold}}, \code{\link{gg_featurespace}}
 }

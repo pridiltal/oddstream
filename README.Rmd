@@ -3,23 +3,7 @@ output: github_document
 title: oddstream
 ---
 
-<img src="logo.png" align="right" height="150"/>
-
-
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
-[![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-[![Build Status](https://travis-ci.org/pridiltal/oddstream.svg?branch=master)](https://travis-ci.org/pridiltal/oddstream)
- 
----
- 
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-3.4.1-6666ff.svg)](https://cran.r-project.org/)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/oddstream)](https://cran.r-project.org/package=oddstream)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](commits/master)
- 
----
- 
-[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/master)
-
+<img src="man/figures/logo.png" align="right" height="150"/>
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -27,7 +11,7 @@ title: oddstream
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "man/figures/README-"
 )
 ```
 
@@ -73,13 +57,13 @@ p1 <- ggplot(g, aes(x = Time, y = Cable, fill = Value)) +
 p1
 ```
 
-```{r example}
+```{r example, eval = FALSE, echo = TRUE}
 library(oddstream)
 # Considers the first window  of the data set as the training set and the remaining as the test stream
 train_data <- anomalous_stream[1:100,]
 test_stream <-anomalous_stream[101:1456,]
 
-output <- find_odd_streams(train_data, test_stream , plot_type = "out_location_plot", trials = 100)
+output <- find_odd_streams(train_data, test_stream , plot_type = "none", trials = 100)
 ```
 
 ### Further Details

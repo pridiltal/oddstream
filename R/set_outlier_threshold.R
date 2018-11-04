@@ -9,7 +9,7 @@
 #' @return Returns a threshold to determine outlying series in the next window  consists with a collection of
 #' time series.
 #' @seealso  \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
-#' \code{\link{plotpc}}
+#' \code{\link{gg_featurespace}}
 #' @export
 #' @importFrom ks Hscv
 #' @importFrom ks kde

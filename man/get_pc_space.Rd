@@ -4,16 +4,18 @@
 \alias{get_pc_space}
 \title{Define a feature space using the PCA components of the feature matrix}
 \usage{
-get_pc_space(features, robust = TRUE)
+get_pc_space(features, robust = TRUE, kpc = 2)
 }
 \arguments{
 \item{features}{Feature matrix returned by \code{\link{extract_tsfeatures}}}
 
-\item{robust}{If TRUE, a robust PCA will be used on the feature matrix}
+\item{robust}{If TRUE, a robust PCA will be used on the feature matrix.}
+
+\item{kpc}{Desired number of components to return.}
 }
 \value{
 It returns a list with class 'pcattributes' containing the following components:
-   \item{pcnorm}{The scores of the firt two pricipal components}
+   \item{pcnorm}{The scores of the firt kpc pricipal components}
    \item{center, scale}{The centering and scaling used}
    \item{rotation}{the matrix of variable loadings (i.e., a matrix whose columns contain the eigenvectors).
                    The function \code{princomp} returns this in the element loadings.}
@@ -29,5 +31,5 @@ pc <- get_pc_space(features)
 }
 \seealso{
 \code{\link[pcaPP]{PCAproj}}, \code{\link[stats]{prcomp}}, \code{\link{find_odd_streams}},
-\code{\link{extract_tsfeatures}}, \code{\link{set_outlier_threshold}}, \code{\link{plotpc}}
+\code{\link{extract_tsfeatures}}, \code{\link{set_outlier_threshold}}, \code{\link{gg_featurespace}}
 }

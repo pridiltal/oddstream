@@ -26,7 +26,7 @@
 #'   \item{moment3}{Third moment}
 #'   \item{highlowmu}{Ratio between the means of data that is below and upper the global mean}
 #' @seealso \code{\link{find_odd_streams}}, \code{\link{get_pc_space}},
-#' \code{\link{set_outlier_threshold}}, \code{\link{plotpc}}
+#' \code{\link{set_outlier_threshold}}, \code{\link{gg_featurespace}}
 #'
 #' @export
 #' @importFrom moments moment

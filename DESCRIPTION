@@ -1,7 +1,7 @@
 Package: oddstream
 Type: Package
 Title: Outlier Detection in Data Streams
-Version: 0.1.0
+Version: 0.5.0
 Depends: R (>= 3.4.0)
 Author: Priyanga Dilini Talagala [aut, cre]
     Rob J. Hyndman [aut, ths]
@@ -34,7 +34,8 @@ Imports: pcaPP,
     dplyr,
     graphics,
     tidyr,
-    kernlab
+    kernlab,
+    magrittr
 Encoding: UTF-8
 Suggests: testthat,
     knitr,
