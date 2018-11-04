@@ -3,7 +3,13 @@ output: github_document
 title: oddstream
 ---
 
-
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
+```
 <!-- rmarkdown v1 -->
 
 <img src="man/figures/logo.png" align="right" height="150"/>
@@ -32,13 +38,7 @@ title: oddstream
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-"
-)
-```
+
 
 # oddstream
 
