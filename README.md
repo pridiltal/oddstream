@@ -26,15 +26,57 @@ Example
 
 ### Multivariate time series plot of `anomalous_stream` dataset available in `oddstream` package
 
-![](man/figures/README-dataset-1.png)
+``` r
+library(oddstream)
+library(tidyverse)
+t <- nrow(anomalous_stream)
+f <- ncol(anomalous_stream)
+data <- as_tibble(anomalous_stream) %>%
+  gather() %>%
+  mutate(key = rep((1:f), each = t), Time = rep(1:t, f)) %>%
+  setNames(c("Cable", "Value", "Time"))
+
+
+p <- data %>% 
+  ggplot(aes(x = Time, y = Cable, fill = Value)) +
+  geom_tile() +
+  scale_fill_gradientn(colours = c("#F0E442", "#000000", "#000000"), values = c(0, .1, max(anomalous_stream))) +
+  scale_x_continuous(breaks = seq(0, 1400, 200)) +
+  scale_y_continuous(breaks = seq(0, 600, 100)) +
+  labs(x= "Time", y= "Time Series ID")
+
+p
+```
+
+<img src="man/figures/README-dataset-1.png" width="100%" height="40%" />
+
+### Two dimensional feature space
+
+``` r
+library(oddstream)
+features <- extract_tsfeatures(anomalous_stream[1:100, 1:100])
+pc <- get_pc_space(features)
+p <- gg_featurespace(pc)
+p
+```
+
+![](man/figures/README-2dpcspace-1.png)
+
+``` r
+
+# Perform a 2D kernel density estimation using MASS::kde2d() and display the results with contours.
+p + ggplot2::geom_density_2d()
+```
+
+![](man/figures/README-2dpcspace-2.png)
 
 ``` r
 library(oddstream)
 # Considers the first window  of the data set as the training set and the remaining as the test stream
-train_data <- anomalous_stream[1:100,]
-test_stream <-anomalous_stream[101:1456,]
+train_data <- anomalous_stream[1:100, ]
+test_stream <- anomalous_stream[101:1456, ]
 
-output <- find_odd_streams(train_data, test_stream , plot_type = "none", trials = 100)
+output <- find_odd_streams(train_data, test_stream, plot_type = "none", trials = 100)
 ```
 
 ### Further Details

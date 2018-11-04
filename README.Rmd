@@ -34,36 +34,49 @@ devtools::install_github("pridiltal/oddstream")
 
 ### Multivariate time series plot of `anomalous_stream` dataset  available in `oddstream` package 
 
-```{r dataset, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+```{r dataset, echo=TRUE, eval=TRUE, warning=FALSE, message=FALSE, out.width= "100%", out.height="40%"}
 library(oddstream)
 library(tidyverse)
 t <- nrow(anomalous_stream)
 f <- ncol(anomalous_stream)
-g <- as_tibble(anomalous_stream) %>% gather() %>%
-  mutate(key= rep((1:f), each = t)) %>%
-  mutate(Time = rep(1:t, f))
-colnames(g) <- c("Cable", "Value", "Time")
-#g <- g%>% mutate(Value = log(Value))
+data <- as_tibble(anomalous_stream) %>%
+  gather() %>%
+  mutate(key = rep((1:f), each = t), Time = rep(1:t, f)) %>%
+  setNames(c("Cable", "Value", "Time"))
 
-p1 <- ggplot(g, aes(x = Time, y = Cable, fill = Value)) + 
+
+p <- data %>% 
+  ggplot(aes(x = Time, y = Cable, fill = Value)) +
   geom_tile() +
-   scale_fill_gradientn(colours = c("#F0E442","#000000", "#000000"), values = c(0,.1,max(anomalous_stream)))+
-  xlab("Time ") + 
-  scale_x_continuous(breaks = seq(0,1400, 200))+
-  scale_y_continuous(breaks = seq(0,600, 100))+
-  ylab("Time Series ID") 
-  #theme(aspect.ratio = 1)
+  scale_fill_gradientn(colours = c("#F0E442", "#000000", "#000000"), values = c(0, .1, max(anomalous_stream))) +
+  scale_x_continuous(breaks = seq(0, 1400, 200)) +
+  scale_y_continuous(breaks = seq(0, 600, 100)) +
+  labs(x= "Time", y= "Time Series ID")
 
-p1
+p
+```
+
+
+### Two dimensional feature space 
+
+```{r 2dpcspace}
+library(oddstream)
+features <- extract_tsfeatures(anomalous_stream[1:100, 1:100])
+pc <- get_pc_space(features)
+p <- gg_featurespace(pc)
+p
+
+# Perform a 2D kernel density estimation using MASS::kde2d() and display the results with contours.
+p + ggplot2::geom_density_2d()
 ```
 
 ```{r example, eval = FALSE, echo = TRUE}
 library(oddstream)
 # Considers the first window  of the data set as the training set and the remaining as the test stream
-train_data <- anomalous_stream[1:100,]
-test_stream <-anomalous_stream[101:1456,]
+train_data <- anomalous_stream[1:100, ]
+test_stream <- anomalous_stream[101:1456, ]
 
-output <- find_odd_streams(train_data, test_stream , plot_type = "none", trials = 100)
+output <- find_odd_streams(train_data, test_stream, plot_type = "none", trials = 100)
 ```
 
 ### Further Details
@@ -78,3 +91,5 @@ output <- find_odd_streams(train_data, test_stream , plot_type = "none", trials 
 - Hyndman, R. J., Wang, E., & Laptev, N. (2015). Large-scale unusual time series detection. In 2015 IEEE International Conference on Data Mining Workshop (ICDMW), (pp. 1616-1619). IEEE.
 
 - Talagala, P. D., Hyndman, R. J., Smith-Miles, K., Kandanaarachchi, S., & Muñoz, M. A. (2018). Anomaly Detection in Streaming Nonstationary Temporal Data. Working paper 4/18, Department of Econometrics & Business Statistics, Monash University.
+
+
