@@ -71,7 +71,7 @@ p <- data %>%
 p
 ```
 
-<img src="man/figures/README-dataset-1.png" title="plot of chunk dataset" alt="plot of chunk dataset" width="100%" height="40%" />
+<img src="man/figures/README-dataset-1.png" title="plot of chunk dataset" alt="plot of chunk dataset" width="100%" />
 
 
 ### Two dimensional feature space 

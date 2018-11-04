@@ -53,7 +53,7 @@ devtools::install_github("pridiltal/oddstream")
 
 ### Multivariate time series plot of `anomalous_stream` dataset  available in `oddstream` package 
 
-```{r dataset, echo=TRUE, eval=TRUE, warning=FALSE, message=FALSE, out.width= "100%", out.height="40%"}
+```{r dataset, echo=TRUE, eval=TRUE, warning=FALSE, message=FALSE, out.width= "100%", fig.height=3}
 library(oddstream)
 library(tidyverse)
 t <- nrow(anomalous_stream)
