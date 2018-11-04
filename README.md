@@ -1,12 +1,11 @@
 ---
 output: github_document
-title: oddstream
 ---
-
-
 <!-- rmarkdown v1 -->
 
-<img src="man/figures/logo.png" align="right" height="150"/>
+
+
+# oddstream <img src="man/figures/logo.png" align="right" height="150"/>
 
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
@@ -28,13 +27,8 @@ title: oddstream
 ---
 
 
-
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-
-
-# oddstream
 
 The goal of oddstream (Outlier Detection in Data Streams) is to propose a framework that provides real time support for early detection of anomalous series within a large collection of streaming time series data. By definition, anomalies are rare in comparison to a system's typical behaviour. We define an anomaly as an observation that  is very unlikely given the forecast distribution. The algorithm first forecasts a boundary for the system's typical behaviour using a representative sample of the typical behaviour of the system. An  approach based on extreme value theory is used for this boundary prediction process. Then a sliding window is used to test for anomalous series within the newly arrived collection of series. Feature based representation of time series is used as the input to the model. To cope with concept drift, the forecast boundary for the system's typical behaviour is updated periodically.
 
