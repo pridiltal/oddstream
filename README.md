@@ -1,3 +1,6 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -97,8 +100,7 @@ library(oddstream)
 # Considers the first window  of the data set as the training set and the remaining as the test stream
 train_data <- anomalous_stream[1:100, ]
 test_stream <- anomalous_stream[101:1456, ]
-
-output <- find_odd_streams(train_data, test_stream, plot_type = "none", trials = 100)
+output <- find_odd_streams(train_data, test_stream, trials = 100)
 ```
 
 ### Further Details
