@@ -5,10 +5,9 @@
 \title{Detect outlying series within a collection of  sreaming time series}
 \usage{
 find_odd_streams(train_data, test_stream, update_threshold = TRUE,
-  update_threshold_freq, plot_type = c("mvtsplot", "line", "pcplot",
-  "out_location_plot"), window_length = nrow(train_data),
-  window_skip = window_length, concept_drift = FALSE, trials = 500,
-  pc_boundary = 50, p_rate = 0.001, cd_alpha = 0.05)
+  window_length = nrow(train_data), window_skip = window_length,
+  concept_drift = FALSE, trials = 500, p_rate = 0.001,
+  cd_alpha = 0.05)
 }
 \arguments{
 \item{train_data}{A multivariate time series data set that represents the typical behaviour of the system.}
@@ -17,13 +16,6 @@ find_odd_streams(train_data, test_stream, update_threshold = TRUE,
 
 \item{update_threshold}{If TRUE, the threshold value to determine outlying series is updated.
 The default value is set to TRUE}
-
-\item{update_threshold_freq}{A numerical value to indicated how often the threshold should be updated.
-(After how many windows it need be updated)}
-
-\item{plot_type}{if "line" multivariate time series plot,  If "pcplot"  two dimensional PC space or if
-"mvtsplot" mvtsplot will be  produced on the current graphic device. For large complex data sets 'mvtsplot' or
- 'out_location_plot' are recommended}
 
 \item{window_length}{Sliding window size (Ideally this window length should be equal to the length of the
 training multivariate time series data set that is used to define the outlying threshold)}
@@ -35,16 +27,14 @@ to FALSE}
 
 \item{trials}{Input for \code{set_outlier_threshold} function. Default value is set to 500.}
 
-\item{pc_boundary}{Expand the pc plot limits by this amount. Default value is set to 50}
+\item{p_rate}{False positive rate. Default value is set to 0.001.}
 
-\item{p_rate}{False positive rate. Default value is set to 0.001}
-
-\item{cd_alpha}{Singnificance level for the test of non-stationarity}
+\item{cd_alpha}{Singnificance level for the test of non-stationarity.}
 }
 \value{
 a list with components
 \item{out_marix}{The indices of the outlying series in each window}
-\item{concept}{p-value for the two sample comparison test for concept drift detection}
+\item{p_value}{p-value for the two sample comparison test for concept drift detection}
 \item{anom_threshold}{anomalous threshold}
 For each window a plot is also produced on the current
 graphic device
@@ -65,16 +55,14 @@ nobs = 15000
 test_stream <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
 test_stream[360:1060, 20:25] = test_stream[360:1060, 20:25] * 1.75
 test_stream[2550:3550, 20:25] =  test_stream[2550:3550, 20:25] * 2
-find_odd_streams(train_data, test_stream , plot_type = 'line', trials = 100)
-
-# To get the PCplot
-#find_odd_streams(train_data, test_stream , plot_type = 'none')
+find_odd_streams(train_data, test_stream , trials = 100)
 
 # Considers the first window  of the data set as the training set and the remaining as
 # the test stream
 train_data <- anomalous_stream[1:100,]
 test_stream <-anomalous_stream[101:1456,]
-find_odd_streams(train_data, test_stream , plot_type = "out_location_plot", trials = 100)
+find_odd_streams(train_data, test_stream , trials = 100)
+
 }
 \references{
 Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate
@@ -82,6 +70,10 @@ extreme value statistics. Journal of signal processing systems, 65 (3),371-389.
 
 Duong, T., Goud, B. & Schauer, K. (2012) Closed-form density-based framework for automatic detection
 of cellular morphology changes. PNAS, 109, 8382-8387.
+
+Talagala, P., Hyndman, R., Smith-Miles, K., Kandanaarachchi, S., & Munoz, M. (2018).
+Anomaly detection in streaming nonstationary temporal data (No. 4/18).
+Monash University, Department of Econometrics and Business Statistics.
 }
 \seealso{
 \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}}, \code{\link{set_outlier_threshold}},

@@ -19,7 +19,7 @@
 #' features <- extract_tsfeatures(anomalous_stream[1:100, 1:100])
 #' pc <- get_pc_space(features)
 #'
-get_pc_space <- function(features, robust = TRUE, kpc = 2 ) {
+get_pc_space <- function(features, robust = TRUE, kpc = 2) {
   if (robust) {
     pc <- pcaPP::PCAproj(features, k = ncol(features), scale = sd, center = mean)
     pcnorm <- pc$scores[, 1:kpc]
@@ -70,10 +70,10 @@ gg_featurespace <- function(object, ...) {
     data <- tibble::as_tibble(object$pcnorm[, 1:2])
 
     # Initialise ggplot object
-    p<- ggplot2::ggplot(
+    p <- ggplot2::ggplot(
       data = data,
       ggplot2::aes_(x = ~PC1, y = ~PC2)
-      )
+    )
 
     # Add data
     p <- p + ggplot2::geom_point(color = "cornflowerblue", size = 2, alpha = 0.8)
@@ -82,7 +82,7 @@ gg_featurespace <- function(object, ...) {
     p <- p + ggplot2::theme(aspect.ratio = 1)
 
     # Add labels
-    p <- p + ggplot2::labs(title="Two dimensional feature space")
+    p <- p + ggplot2::labs(title = "Two dimensional feature space")
 
     return(p)
   }

@@ -16,6 +16,11 @@
 #' @importFrom MASS mvrnorm
 #' @references Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate extreme value statistics.
 #' Journal of signal processing systems, 65 (3),371-389.
+#'
+#' Talagala, P., Hyndman, R., Smith-Miles, K., Kandanaarachchi, S., & Munoz, M. (2018).
+#' Anomaly detection in streaming nonstationary temporal data (No. 4/18).
+#' Monash University, Department of Econometrics and Business Statistics.
+#'
 #' @examples
 #' #Generate training dataset
 #' set.seed(123)
@@ -40,19 +45,18 @@ set_outlier_threshold <- function(pc_pcnorm, p_rate = 0.001, trials = 500) {
   xtreme_fx <- numeric(trials)
   f_extreme <- function(tempt) {
     s <- sample(1:m, size = m, replace = T)
-    fhat <- ks::kde(x = pc_pcnorm, H = H_scv, compute.cont = TRUE, eval.points = t(apply(
-      pc_pcnorm[s, ],
-      1, fun2
-    )))
+    fhat <- ks::kde(
+      x = pc_pcnorm, H = H_scv, compute.cont = TRUE,
+      eval.points = t(apply(pc_pcnorm[s, ], 1, fun2))
+    )
     return(tempt <- min(fhat$estimate))
   }
   xtreme_fx <- sapply(X = xtreme_fx, f_extreme)
 
-  # op <- par(mfrow = c(2, 1)) hist(xtreme_fx) Apply Psi transformation
+
   k <- 1 / (2 * pi)
   psi_trans <- ifelse(xtreme_fx < k, (-2 * log(xtreme_fx) - 2 * log(2 * pi))^0.5, 0)
   p <- sum(!(psi_trans == 0)) / length(psi_trans)
-  # hist(psi_trans)
   y <- -log(-log(1 - p_rate * p))
   cm <- sqrt(2 * log(m)) - ((log(log(m)) + log(4 * pi)) / (2 * sqrt(2 * log(m))))
   dm <- 1 / (sqrt(2 * log(m)))

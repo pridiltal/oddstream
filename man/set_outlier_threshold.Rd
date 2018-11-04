@@ -36,6 +36,10 @@ threshold$threshold_fnx
 \references{
 Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate extreme value statistics.
 Journal of signal processing systems, 65 (3),371-389.
+
+Talagala, P., Hyndman, R., Smith-Miles, K., Kandanaarachchi, S., & Munoz, M. (2018).
+Anomaly detection in streaming nonstationary temporal data (No. 4/18).
+Monash University, Department of Econometrics and Business Statistics.
 }
 \seealso{
 \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},

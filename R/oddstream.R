@@ -21,8 +21,9 @@
 #' Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate extreme value statistics.
 #' Journal of signal processing systems, 65 (3),371-389.
 #'
-#' Priyanga Dilini Talagala, Rob J Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Muñoz (2017).
-#' Anomaly Detection in Streaming Time Series Data.
+#' Talagala, P., Hyndman, R., Smith-Miles, K., Kandanaarachchi, S., & Munoz, M. (2018).
+#' Anomaly detection in streaming nonstationary temporal data (No. 4/18).
+#' Monash University, Department of Econometrics and Business Statistics.
 #'
 #' @note The name \code{oddstream} comes from \code{Outlier Detection in Data STREAMs}
 #' @docType package
