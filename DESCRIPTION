@@ -3,10 +3,12 @@ Type: Package
 Title: Outlier Detection in Data Streams
 Version: 0.5.0
 Depends: R (>= 3.4.0)
-Author: Priyanga Dilini Talagala [aut, cre]
-    Rob J. Hyndman [aut, ths]
-    Kate Smith-Miles [aut, ths]
 Maintainer: Priyanga Dilini Talagala <dilini.talagala@monash.edu>
+Authors@R: c(
+    person("Priyanga Dilini", "Talagala", email="dilini.talagala@monash.edu", role= c("aut","cre")),
+    person("Rob J.", "Hyndman", role='ths'),
+    person("Kate", "Smith-Miles", role ='ths')
+    )
 Description: We proposes a framework that provides real time support for early detection of
     anomalous series within a large collection of streaming time series data. By definition, anomalies
     are rare in comparison to a system's typical behaviour. We define an anomaly as an observation that
@@ -18,7 +20,7 @@ Description: We proposes a framework that provides real time support for early d
     the forecast boundary for the system's typical behaviour is updated periodically.
 License: GPL-3
 LazyData: true
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Imports: pcaPP,
     stats,
     ggplot2,
