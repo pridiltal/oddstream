@@ -261,6 +261,6 @@ highlowmu <- function(x) {
   mu <- mean(x, na.rm = TRUE)
   mhi <- mean(x[x > mu], na.rm = TRUE)
   mlo <- mean(x[x < mu], na.rm = TRUE)
-  out <- mhi - mu / (mu - mlo)
+  out <- (mhi - mu) / (mu - mlo)
   return(out)
 }
