@@ -19,7 +19,7 @@ the typical behaviour of the system. An approach based on extreme value theory i
 prediction process. Then a sliding window is used to test for anomalous series within the newly arrived
 collection of series. Feature based representation of time series is used as the input to the model. To
 cope with concept drift, the forecast boundary for the system's typical behaviour is updated periodically.
-More details regarding the algorithm can be found in Talagala, P. D., Hyndman, R. J., Smith-Miles, K.,, et al.
+More details regarding the algorithm can be found in Talagala, P. D., Hyndman, R. J., Smith-Miles, K., et al.
 (2019) DOI:10.1080/10618600.2019.1617160.
 }
 \note{

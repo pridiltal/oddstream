@@ -23,10 +23,10 @@
 #'
 #' @examples
 #' \donttest{
-#' #Generate training dataset
+#' # Generate training dataset
 #' set.seed(123)
-#' nobs = 500
-#' nts = 50
+#' nobs <- 500
+#' nts <- 50
 #' train_data <- ts(apply(matrix(ncol = nts, nrow = nobs), 2, function(nobs){10 + rnorm(nobs, 0, 3)}))
 #' features <- extract_tsfeatures(train_data)
 #' pc <- get_pc_space(features)

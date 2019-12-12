@@ -13,7 +13,7 @@
 #' prediction process. Then a sliding window is used to test for anomalous series within the newly arrived
 #' collection of series. Feature based representation of time series is used as the input to the model. To
 #' cope with concept drift, the forecast boundary for the system's typical behaviour is updated periodically.
-#' More details regarding the algorithm can be found in Talagala, P. D., Hyndman, R. J., Smith-Miles, K.,, et al.
+#' More details regarding the algorithm can be found in Talagala, P. D., Hyndman, R. J., Smith-Miles, K., et al.
 #' (2019) DOI:10.1080/10618600.2019.1617160.
 #'
 #' @seealso The core functions in this package: \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
