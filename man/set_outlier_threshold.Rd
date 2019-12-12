@@ -23,6 +23,7 @@ of the typical behaviour of a given system. An approach based on extreme value t
 prediction process.
 }
 \examples{
+\donttest{
 #Generate training dataset
 set.seed(123)
 nobs = 500
@@ -32,6 +33,8 @@ features <- extract_tsfeatures(train_data)
 pc <- get_pc_space(features)
 threshold <- set_outlier_threshold(pc$pcnorm)
 threshold$threshold_fnx
+}
+
 }
 \references{
 Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate extreme value statistics.

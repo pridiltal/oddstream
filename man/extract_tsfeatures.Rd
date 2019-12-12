@@ -42,9 +42,12 @@ This is a modification oftsmeasures function of anomalous package
 package .
 }
 \examples{
+\donttest{
 mvtsplot::mvtsplot(anomalous_stream, levels=8, gcol=2, norm="global")
 features <- extract_tsfeatures(anomalous_stream[500:550, ])
 plot.ts(features[, 1:10])
+}
+
 }
 \references{
 {Hyndman, R. J., Wang, E., & Laptev, N. (2015). Large-scale unusual time series detection.

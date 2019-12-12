@@ -19,6 +19,8 @@ the typical behaviour of the system. An approach based on extreme value theory i
 prediction process. Then a sliding window is used to test for anomalous series within the newly arrived
 collection of series. Feature based representation of time series is used as the input to the model. To
 cope with concept drift, the forecast boundary for the system's typical behaviour is updated periodically.
+More details regarding the algorithm can be found in Talagala, P. D., Hyndman, R. J., Smith-Miles, K.,, et al.
+(2019) DOI:10.1080/10618600.2019.1617160.
 }
 \note{
 The name \code{oddstream} comes from \code{Outlier Detection in Data STREAMs}
@@ -27,14 +29,10 @@ The name \code{oddstream} comes from \code{Outlier Detection in Data STREAMs}
 Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate extreme value statistics.
 Journal of signal processing systems, 65 (3),371-389.
 
-Talagala, P., Hyndman, R., Smith-Miles, K., Kandanaarachchi, S., & Munoz, M. (2018).
-Anomaly detection in streaming nonstationary temporal data (No. 4/18).
-Monash University, Department of Econometrics and Business Statistics.
+Talagala, P. D., Hyndman, R. J., Smith-Miles, K., et al. (2019). Anomaly detection in streaming nonstationary temporal data.
+Journal of Computational and Graphical Statistics, 1-28. DOI:10.1080/10618600.2019.1617160.
 }
 \seealso{
 The core functions in this package: \code{\link{find_odd_streams}},  \code{\link{extract_tsfeatures}}, \code{\link{get_pc_space}},
 \code{\link{set_outlier_threshold}}, \code{\link{gg_featurespace}}
-}
-\author{
-Priyanga Dilini Talagala, Rob J. Hyndman, Kate Smith-Miles, Sevvandi Kandanaarachchi, Mario A. Muñoz
 }

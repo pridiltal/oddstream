@@ -22,6 +22,7 @@
 #' Monash University, Department of Econometrics and Business Statistics.
 #'
 #' @examples
+#' \donttest{
 #' #Generate training dataset
 #' set.seed(123)
 #' nobs = 500
@@ -31,6 +32,8 @@
 #' pc <- get_pc_space(features)
 #' threshold <- set_outlier_threshold(pc$pcnorm)
 #' threshold$threshold_fnx
+#' }
+#'
 set_outlier_threshold <- function(pc_pcnorm, p_rate = 0.001, trials = 500) {
 
   # Calculating the density region for typical data

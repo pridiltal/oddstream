@@ -34,6 +34,7 @@
 #' @importFrom kernlab kmmd
 #' @import stats
 #' @examples
+#' \donttest{
 #' #Generate training dataset
 #' set.seed(890)
 #' nobs = 250
@@ -45,13 +46,15 @@
 #' test_stream[360:1060, 20:25] = test_stream[360:1060, 20:25] * 1.75
 #' test_stream[2550:3550, 20:25] =  test_stream[2550:3550, 20:25] * 2
 #' find_odd_streams(train_data, test_stream , trials = 100)
-
+#' }
 #'
 #' # Considers the first window  of the data set as the training set and the remaining as
 #' # the test stream
-#' train_data <- anomalous_stream[1:100,]
+#' \donttest{
+#' train_1data <- anomalous_stream[1:100,]
 #' test_stream <-anomalous_stream[101:1456,]
 #' find_odd_streams(train_data, test_stream , trials = 100)
+#' }
 #'
 #' @references Clifton, D. A., Hugueny, S., & Tarassenko, L. (2011). Novelty detection with multivariate
 #' extreme value statistics. Journal of signal processing systems, 65 (3),371-389.
