@@ -1,7 +1,7 @@
 Package: oddstream
 Type: Package
 Title: Outlier Detection in Data Streams
-Version: 0.5.0
+Version: 0.5.1
 Depends: R (>= 3.4.0)
 Maintainer: Priyanga Dilini Talagala <pritalagala@gmail.com>
 Authors@R: c(
@@ -23,7 +23,7 @@ Description: We proposes a framework that provides real time support for early d
 BugReports: https://github.com/pridiltal/oddstream/issues
 License: GPL-3
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 Imports: pcaPP,
     stats,
     ggplot2,

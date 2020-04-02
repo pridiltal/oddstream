@@ -21,12 +21,13 @@
 #'
 get_pc_space <- function(features, robust = TRUE, kpc = 2) {
   if (robust) {
-    pc <- pcaPP::PCAproj(features, k = ncol(features), scale = sd, center = mean)
+    k <- ifelse(nrow(features) < ncol(features), nrow(features),  ncol(features))
+    pc <- pcaPP::PCAproj(features, k , scale = sd, center = mean)
     pcnorm <- pc$scores[, 1:kpc]
     colnames(pcnorm) <- c("PC1", "PC2")
     pc <- list(
       pcnorm = pcnorm, center = pc$center, scale = pc$scale,
-      rotation = pc$loadings[, 1:ncol(features)]
+      rotation = pc$loadings[, 1:k]
     )
   } else {
     pc <- stats::prcomp(features, center = TRUE, scale. = TRUE)

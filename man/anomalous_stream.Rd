@@ -4,7 +4,9 @@
 \name{anomalous_stream}
 \alias{anomalous_stream}
 \title{Multivariate timeseries dataset with an anomalous event.}
-\format{A data frame with  640 series each with 1459 time points.}
+\format{
+A data frame with  640 series each with 1459 time points.
+}
 \usage{
 anomalous_stream
 }

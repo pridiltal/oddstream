@@ -3,7 +3,6 @@
 \docType{package}
 \name{oddstream}
 \alias{oddstream}
-\alias{oddstream-package}
 \title{oddstream: A package for Outlier Detection in Data Streams}
 \description{
 Rapid advances in hardware technology have enabled a wide range of physical objects, living  beings

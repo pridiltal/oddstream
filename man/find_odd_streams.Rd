@@ -4,10 +4,17 @@
 \alias{find_odd_streams}
 \title{Detect outlying series within a collection of  sreaming time series}
 \usage{
-find_odd_streams(train_data, test_stream, update_threshold = TRUE,
-  window_length = nrow(train_data), window_skip = window_length,
-  concept_drift = FALSE, trials = 500, p_rate = 0.001,
-  cd_alpha = 0.05)
+find_odd_streams(
+  train_data,
+  test_stream,
+  update_threshold = TRUE,
+  window_length = nrow(train_data),
+  window_skip = window_length,
+  concept_drift = FALSE,
+  trials = 500,
+  p_rate = 0.001,
+  cd_alpha = 0.05
+)
 }
 \arguments{
 \item{train_data}{A multivariate time series data set that represents the typical behaviour of the system.}
